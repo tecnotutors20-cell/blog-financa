@@ -179,11 +179,21 @@ def main() -> None:
           <b:widget-setting name='link-6'>/p/aviso-financeiro.html</b:widget-setting>"""
     text = replace_widget_settings(text, "LinkList76", footer_menu)
 
-    # 9) Ocultar perfis sociais de demonstração até existirem perfis oficiais do projeto.
-    text = set_widget_visibility(text, "LinkList73", False)
-    text = set_widget_visibility(text, "LinkList75", False)
+    # 9) Ocultar perfis sociais e widgets demonstrativos do template.
+    for widget_id in ("LinkList73", "LinkList75", "HTML1", "HTML14", "HTML16"):
+        text = set_widget_visibility(text, widget_id, False)
 
-    # 10) Aviso financeiro em todos os artigos, importante para conteúdo YMYL.
+    # 10) Localizar textos ainda em inglês e neutralizar configuração Disqus de demonstração.
+    text = re.sub(
+        r"(<b:widget id='PopularPosts2'[^>]*? title=')Most Popular(')",
+        r"\1Mais lidos\2",
+        text,
+        count=1,
+    )
+    text = re.sub(r"(?m)^(\s*)Read More\s*$", r"\1Leia mais", text)
+    text = text.replace('disqusShortname = "templatesyard";', 'disqusShortname = "";')
+
+    # 11) Aviso financeiro em todos os artigos, importante para conteúdo YMYL.
     body_old = """              <div class='post-body post-content' id='post-body'>
                 <data:post.body/>
               </div>
@@ -197,7 +207,7 @@ def main() -> None:
                  <!-- Ads after post content. -->"""
     text = replace_or_accept(text, body_old, body_new, "aviso financeiro nos artigos")
 
-    # 11) UX/acessibilidade e apresentação do aviso.
+    # 12) UX/acessibilidade e apresentação do aviso.
     skin_end = "]]></b:skin>"
     extra_css = """
 /* SEO/UX: foco visível para navegação por teclado */
@@ -219,7 +229,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .finance-disclaimer strong{color:#1f2937}
 """.strip()
     if "/* Transparência editorial para conteúdo financeiro */" not in text:
-        # Remove a versão anterior do bloco de foco, se já existir, para não duplicar.
         text = re.sub(
             r"/\* SEO/UX: foco visível para navegação por teclado \*/\s*a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible\{.*?\}\s*",
             "",
