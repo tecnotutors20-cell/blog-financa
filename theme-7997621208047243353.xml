@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:class='data:blog.languageDirection' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:class='data:blog.languageDirection' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
-    <meta content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1' name='viewport'/>
+    <meta content='width=device-width, initial-scale=1' name='viewport'/>
     <title><data:view.title.escaped/></title>
     <link href='//1.bp.blogspot.com' rel='dns-prefetch'/>
     <link href='//2.bp.blogspot.com' rel='dns-prefetch'/>
@@ -19,10 +19,12 @@
     <link href='//disqus.com' rel='dns-prefetch'/>
     <b:include data='blog' name='all-head-content'/>
 <b:if cond='data:view.isHomepage'> 
- <script type='application/ld+json'>{&quot;@context&quot;:&quot;http://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;<data:view.title.escaped/>&quot;,&quot;url&quot;:&quot;<data:view.url.canonical/>&quot;,&quot;potentialAction&quot;:{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:&quot;<data:view.url.canonical/>search?q={search_term_string}&quot;,&quot;query-input&quot;:&quot;required name=search_term_string&quot;}}</script>
+ <script type='application/ld+json'>{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;<data:view.title.escaped/>&quot;,&quot;url&quot;:&quot;<data:view.url.canonical/>&quot;,&quot;potentialAction&quot;:{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:&quot;<data:view.url.canonical/>search?q={search_term_string}&quot;,&quot;query-input&quot;:&quot;required name=search_term_string&quot;}}</script>
     </b:if>
     <!-- Google Fonts -->
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i' media='all' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com' rel='preconnect'/>
+    <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&amp;display=swap' media='all' rel='stylesheet' type='text/css'/>
    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' rel='stylesheet'/>
   <b:if cond='!data:view.isLayoutMode'>
 <!-- Template Style CSS -->
@@ -3903,6 +3905,11 @@ display:none;
         width:100%
     }
 }
+/* SEO/UX: foco visível para navegação por teclado */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+    outline:2px solid $(main.color);
+    outline-offset:2px
+}
 ]]></b:skin>
    
 <style>
@@ -5474,7 +5481,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
               <nav id='breadcrumb'><a expr:href='data:blog.homepageUrl'><data:messages.home/></a><b:if cond='data:post.labels'><em class='delimiter'/><a class='b-label' expr:href='data:post.labels.last.url'><data:post.labels.last.name/></a></b:if><em class='delimiter'/><span class='current'><data:post.title/></span></nav>
               <script type='application/ld+json'>
               {
-                &quot;@context&quot;: &quot;http://schema.org&quot;,
+                &quot;@context&quot;: &quot;https://schema.org&quot;,
                 &quot;@type&quot;: &quot;BreadcrumbList&quot;,
                 &quot;@id&quot;: &quot;#Breadcrumb&quot;,
                 &quot;itemListElement&quot;: [{
@@ -5609,17 +5616,12 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
   },
 </b:includable>
               <b:includable id='postMetadataJSONPublisher'>
- &quot;publisher&quot;: {
-    &quot;@type&quot;: &quot;Organization&quot;,
-    &quot;name&quot;: &quot;Blogger&quot;,
-    &quot;logo&quot;: {
-      &quot;@type&quot;: &quot;ImageObject&quot;,
-      &quot;url&quot;: &quot;https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=h60&quot;,
-      &quot;width&quot;: 206,
-      &quot;height&quot;: 60
-    }
-  },
-</b:includable>
+               &quot;publisher&quot;: {
+                  &quot;@type&quot;: &quot;Organization&quot;,
+                  &quot;name&quot;: &quot;<data:blog.title.escaped/>&quot;,
+                  &quot;url&quot;: &quot;<data:blog.homepageUrl/>&quot;
+                },
+              </b:includable>
               <b:includable id='postNavigation' var='post'>
               <!-- Post Navigation Item -->
               <ul class='post-nav'>
