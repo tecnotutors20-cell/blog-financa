@@ -3910,6 +3910,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     outline:2px solid $(main.color);
     outline-offset:2px
 }
+/* Transparência editorial para conteúdo financeiro */
+.finance-disclaimer{
+    margin:24px 0 0;
+    padding:16px;
+    background:#f7f8fa;
+    border:1px solid #e4e7eb;
+    border-radius:8px;
+    color:#4b5563;
+    font-size:13px;
+    line-height:1.6
+}
+.finance-disclaimer strong{color:#1f2937}
 ]]></b:skin>
    
 <style>
@@ -4798,12 +4810,12 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
           <b:widget id='LinkList72' locked='true' title='Link List' type='LinkList' version='2' visible='true'>
             <b:widget-settings>
               <b:widget-setting name='sorting'>NONE</b:widget-setting>
-              <b:widget-setting name='text-1'>About</b:widget-setting>
-              <b:widget-setting name='link-1'>https://topseo-templatesyard.blogspot.com/p/about-us.html</b:widget-setting>
+              <b:widget-setting name='text-1'>Sobre</b:widget-setting>
+              <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
               <b:widget-setting name='text-0'>Home</b:widget-setting>
-              <b:widget-setting name='link-2'>https://topseo-templatesyard.blogspot.com/p/contact-us.html</b:widget-setting>
+              <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>
               <b:widget-setting name='link-0'>/</b:widget-setting>
-              <b:widget-setting name='text-2'>Contact</b:widget-setting>
+              <b:widget-setting name='text-2'>Contato</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
               <b:include name='content'/>
@@ -4821,7 +4833,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
         </b:section>
       <!-- Top Social --> 
         <b:section class='top-bar-social social' id='top-bar-social' maxwidgets='1' name='Social Top' showaddelement='yes'>
-           <b:widget id='LinkList73' locked='true' title='Top Social Widget' type='LinkList' version='2' visible='true'>
+           <b:widget id='LinkList73' locked='true' title='Top Social Widget' type='LinkList' version='2' visible='false'>
              <b:widget-settings>
                <b:widget-setting name='link-3'>#</b:widget-setting>
                <b:widget-setting name='sorting'>NONE</b:widget-setting>
@@ -4972,36 +4984,22 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
         <b:section class='main-menu' id='main-menu' maxwidgets='1' name='Main Menu / Dropdown / Multi Dropdown / Megamenu' showaddelement='yes'>
            <b:widget id='LinkList74' locked='true' title='Link List' type='LinkList' version='2' visible='true'>
              <b:widget-settings>
-               <b:widget-setting name='text-10'>Documentation</b:widget-setting>
                <b:widget-setting name='sorting'>NONE</b:widget-setting>
-               <b:widget-setting name='link-1'>#</b:widget-setting>
-               <b:widget-setting name='link-13'>https://www.templatesyard.com/2025/03/topseo-blogger-template.html</b:widget-setting>
-               <b:widget-setting name='link-2'>#</b:widget-setting>
-               <b:widget-setting name='link-12'>https://youtu.be/vt97YP72YlU</b:widget-setting>
-               <b:widget-setting name='link-0'>/</b:widget-setting>
-               <b:widget-setting name='link-11'>https://www.sorabloggingtips.com/2025/03/how-to-setup-topseo-blogger-template.html</b:widget-setting>
-               <b:widget-setting name='link-10'>#</b:widget-setting>
-               <b:widget-setting name='text-9'>Mega Menu</b:widget-setting>
-               <b:widget-setting name='link-9'>random/mega-menu</b:widget-setting>
-               <b:widget-setting name='text-8'>_Error Page</b:widget-setting>
-               <b:widget-setting name='link-7'>https://www.sorabloggingtips.com/2017/01/how-to-add-sitemap-widget-in-blogspot-blogs.html</b:widget-setting>
-               <b:widget-setting name='link-8'>https://topseo-templatesyard.blogspot.com/templatesyard</b:widget-setting>
-               <b:widget-setting name='link-5'>#</b:widget-setting>
-               <b:widget-setting name='link-6'>https://topseo-templatesyard.blogspot.com/p/page-markup-and-typography.html</b:widget-setting>
-               <b:widget-setting name='link-3'>#</b:widget-setting>
-               <b:widget-setting name='link-4'>#</b:widget-setting>
-               <b:widget-setting name='text-1'>Features</b:widget-setting>
                <b:widget-setting name='text-0'>Home-icon</b:widget-setting>
-               <b:widget-setting name='text-3'>__DropDown 1</b:widget-setting>
-               <b:widget-setting name='text-2'>_Multi DropDown</b:widget-setting>
-               <b:widget-setting name='text-5'>__DropDown 3</b:widget-setting>
-               <b:widget-setting name='text-4'>__DropDown 2</b:widget-setting>
-               <b:widget-setting name='text-7'>_SiteMap</b:widget-setting>
-               <b:widget-setting name='text-6'>_ShortCodes</b:widget-setting>
-               <b:widget-setting name='text-11'>_Web Documentation</b:widget-setting>
-               <b:widget-setting name='text-12'>_Video Documentation</b:widget-setting>
-               <b:widget-setting name='text-13'>Download This Template</b:widget-setting>
-             </b:widget-settings>
+               <b:widget-setting name='link-0'>/</b:widget-setting>
+               <b:widget-setting name='text-1'>Cartões</b:widget-setting>
+               <b:widget-setting name='link-1'>/search/label/Cartoes</b:widget-setting>
+               <b:widget-setting name='text-2'>Bancos</b:widget-setting>
+               <b:widget-setting name='link-2'>/search/label/Bancos</b:widget-setting>
+               <b:widget-setting name='text-3'>Investimentos</b:widget-setting>
+               <b:widget-setting name='link-3'>/search/label/Investimentos</b:widget-setting>
+               <b:widget-setting name='text-4'>Economia</b:widget-setting>
+               <b:widget-setting name='link-4'>/search/label/Economia</b:widget-setting>
+               <b:widget-setting name='text-5'>Renda Extra</b:widget-setting>
+               <b:widget-setting name='link-5'>/search/label/Renda%20Extra</b:widget-setting>
+               <b:widget-setting name='text-6'>Sobre</b:widget-setting>
+               <b:widget-setting name='link-6'>/p/sobre.html</b:widget-setting>
+            </b:widget-settings>
              <b:includable id='main'>
               <b:include name='content'/>
             </b:includable>
@@ -5470,6 +5468,9 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
               <div class='post-body post-content' id='post-body'>
                 <data:post.body/>
               </div>
+              <b:if cond='data:view.isPost'>
+                <aside class='finance-disclaimer' role='note'><strong>Aviso:</strong> Este conteúdo tem caráter educativo e informativo e não constitui recomendação individual de investimento, crédito ou contratação de produto financeiro. Compare custos, riscos e condições e consulte profissionais habilitados quando necessário.</aside>
+              </b:if>
                  <!-- Ads after post content. -->
       <b:if cond='data:view.isPost'><b:tag cond='data:widgets any w =&gt; w.sectionId == &quot;ty-post-after-ad&quot;' id='nxt-ad' name='div'/></b:if>
             </b:includable>
@@ -6386,7 +6387,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
           </b:widget>
         </b:section>
         <b:section class='sidebar' id='social-widget' maxwidgets='1' name='Social Widget' showaddelement='yes'>
-          <b:widget id='LinkList75' locked='true' title='Social Plugin' type='LinkList' version='2' visible='true'>
+          <b:widget id='LinkList75' locked='true' title='Social Plugin' type='LinkList' version='2' visible='false'>
             <b:widget-settings>
               <b:widget-setting name='text-9'>dribbble</b:widget-setting>
               <b:widget-setting name='link-9'>#</b:widget-setting>
@@ -7020,13 +7021,21 @@ height: 100%;
       <b:widget id='LinkList76' locked='true' title='Menu Footer Widget' type='LinkList' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='sorting'>NONE</b:widget-setting>
-          <b:widget-setting name='text-1'>About</b:widget-setting>
-          <b:widget-setting name='link-1'>https://topseo-templatesyard.blogspot.com/p/about-us.html</b:widget-setting>
-          <b:widget-setting name='text-0'>Home</b:widget-setting>
-          <b:widget-setting name='link-2'>https://topseo-templatesyard.blogspot.com/p/contact-us.html</b:widget-setting>
+          <b:widget-setting name='text-0'>Início</b:widget-setting>
           <b:widget-setting name='link-0'>/</b:widget-setting>
-          <b:widget-setting name='text-2'>Contact Us</b:widget-setting>
-        </b:widget-settings>
+          <b:widget-setting name='text-1'>Sobre</b:widget-setting>
+          <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
+          <b:widget-setting name='text-2'>Contato</b:widget-setting>
+          <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>
+          <b:widget-setting name='text-3'>Privacidade</b:widget-setting>
+          <b:widget-setting name='link-3'>/p/politica-de-privacidade.html</b:widget-setting>
+          <b:widget-setting name='text-4'>Termos</b:widget-setting>
+          <b:widget-setting name='link-4'>/p/termos-de-uso.html</b:widget-setting>
+          <b:widget-setting name='text-5'>Política Editorial</b:widget-setting>
+          <b:widget-setting name='link-5'>/p/politica-editorial.html</b:widget-setting>
+          <b:widget-setting name='text-6'>Aviso Financeiro</b:widget-setting>
+          <b:widget-setting name='link-6'>/p/aviso-financeiro.html</b:widget-setting>
+            </b:widget-settings>
         <b:includable id='main'>
   <b:include name='widget-title'/>
   <b:include name='content'/>
