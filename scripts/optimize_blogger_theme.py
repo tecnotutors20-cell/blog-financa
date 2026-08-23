@@ -14,13 +14,14 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
 
 def replace_or_accept(text: str, old: str, new: str, label: str) -> str:
     """Aplica a troca uma vez ou aceita o estado já otimizado."""
+    # Checar primeiro o estado novo evita duplicar quando `old` é prefixo de `new`.
+    if new in text:
+        return text
     old_count = text.count(old)
     if old_count == 1:
         return text.replace(old, new, 1)
     if old_count > 1:
         raise RuntimeError(f"{label}: encontrado mais de um trecho antigo ({old_count})")
-    if new in text:
-        return text
     raise RuntimeError(f"{label}: nem o trecho antigo nem o otimizado foram encontrados")
 
 
