@@ -2,6 +2,11 @@ name: Publish Blogger content
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/publish-blogger.yml
 
 permissions:
   contents: read
