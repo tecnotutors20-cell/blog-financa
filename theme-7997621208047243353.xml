@@ -4411,7 +4411,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
     fixedSidebar = true,
     fixedMenu = true,
     commentsSystem = "blogger",
-    disqusShortname = "templatesyard";
+    disqusShortname = "";
 //]]>
 </script>
 
@@ -4587,7 +4587,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
              <p class='post-snippet'><b:eval expr='data:post.snippets.long snippet { length: 100 }'/></p>
             <div class='jump-link flat-button'>
     <a expr:href='data:post.url fragment &quot;more&quot;' expr:title='data:post.title'>
-      Read More
+      Leia mais
     </a>
             </div>
           </div>
@@ -4912,7 +4912,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
             </b:widget>
           </b:section>
           <b:section class='header-ads' id='header-ads' maxwidgets='1' name='Header Ads 728x90' showaddelement='yes'>
-            <b:widget id='HTML1' locked='false' title='Header Ads Widget' type='HTML' visible='true'>
+            <b:widget id='HTML1' locked='false' title='Header Ads Widget' type='HTML' visible='false'>
               <b:widget-settings>
                 <b:widget-setting name='content'><![CDATA[<a class="sora-ads-full" href="javascript:;">Responsive Advertisement</a>
 <style>
@@ -6353,7 +6353,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
              <p class='post-snippet'><b:eval expr='data:post.snippets.long snippet { length: 100 }'/></p>
             <div class='jump-link flat-button'>
     <a expr:href='data:post.url fragment &quot;more&quot;' expr:title='data:post.title'>
-      Read More
+      Leia mais
     </a>
             </div>
           </div>
@@ -6427,7 +6427,7 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
           </b:widget>
         </b:section>
         <b:section class='sidebar common-widget' id='sidebar2' name='Sidebar Right (B)' showaddelement='yes'>
-          <b:widget id='HTML14' locked='false' title='Subscribe Us' type='HTML' visible='true'>
+          <b:widget id='HTML14' locked='false' title='Subscribe Us' type='HTML' visible='false'>
             <b:widget-settings>
               <b:widget-setting name='content'><![CDATA[<div class="videoWrapper">
     <!-- Copy & Pasted from YouTube -->
@@ -6456,7 +6456,7 @@ height: 100%;
   </div>
 </b:includable>
           </b:widget>
-          <b:widget id='HTML16' locked='false' title='Ad Space' type='HTML' visible='true'>
+          <b:widget id='HTML16' locked='false' title='Ad Space' type='HTML' visible='false'>
             <b:widget-settings>
               <b:widget-setting name='content'><![CDATA[<a class="sora-ads-side" href="javascript:;">Responsive Advertisement</a>
 <style>
@@ -6480,7 +6480,7 @@ height: 100%;
   </div>
 </b:includable>
           </b:widget>
-          <b:widget id='PopularPosts2' locked='false' title='Most Popular' type='PopularPosts' version='2' visible='true'>
+          <b:widget id='PopularPosts2' locked='false' title='Mais lidos' type='PopularPosts' version='2' visible='true'>
             <b:widget-settings>
               <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
               <b:widget-setting name='showThumbnails'>true</b:widget-setting>
