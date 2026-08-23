@@ -14,9 +14,6 @@
     <link href='//pagead2.googlesyndication.com' rel='dns-prefetch'/>
     <link href='//www.googletagmanager.com' rel='dns-prefetch'/>
     <link href='//www.google-analytics.com' rel='dns-prefetch'/>
-    <link href='//connect.facebook.net' rel='dns-prefetch'/>
-    <link href='//c.disquscdn.com' rel='dns-prefetch'/>
-    <link href='//disqus.com' rel='dns-prefetch'/>
     <b:include data='blog' name='all-head-content'/>
 <b:if cond='data:view.isHomepage'> 
  <script type='application/ld+json'>{&quot;@context&quot;:&quot;https://schema.org&quot;,&quot;@type&quot;:&quot;WebSite&quot;,&quot;name&quot;:&quot;<data:view.title.escaped/>&quot;,&quot;url&quot;:&quot;<data:view.url.canonical/>&quot;,&quot;potentialAction&quot;:{&quot;@type&quot;:&quot;SearchAction&quot;,&quot;target&quot;:&quot;<data:view.url.canonical/>search?q={search_term_string}&quot;,&quot;query-input&quot;:&quot;required name=search_term_string&quot;}}</script>
@@ -4405,7 +4402,7 @@ body#layout .footer-about-area, body#layout .foot-bar-social {
 <script defer='defer' type='text/javascript'>
 //<![CDATA[
 // Global variables with content. "Available for Edit"
-var monthFormat = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
     noThumbnail = "https://4.bp.blogspot.com/-O3EpVMWcoKw/WxY6-6I4--I/AAAAAAAAB2s/KzC0FqUQtkMdw7VzT6oOR_8vbZO6EJc-ACK4BGAYYCw/w680/nth.png",
     postPerPage = 7,
     fixedSidebar = true,
@@ -4755,18 +4752,18 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
       </b:widget>
       <b:widget id='LinkList71' locked='true' title='Default Variables' type='LinkList' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='link-3'>true</b:widget-setting>
           <b:widget-setting name='sorting'>NONE</b:widget-setting>
-          <b:widget-setting name='link-4'>5</b:widget-setting>
-          <b:widget-setting name='text-1'>commentsSystem</b:widget-setting>
-          <b:widget-setting name='link-1'>blogger</b:widget-setting>
-          <b:widget-setting name='text-0'>disqusShortname</b:widget-setting>
-          <b:widget-setting name='link-2'>true</b:widget-setting>
-          <b:widget-setting name='text-3'>fixedMenu</b:widget-setting>
-          <b:widget-setting name='link-0'>templatesyard</b:widget-setting>
-          <b:widget-setting name='text-2'>fixedSidebar</b:widget-setting>
-          <b:widget-setting name='text-4'>postPerPage</b:widget-setting>
-        </b:widget-settings>
+<b:widget-setting name='text-0'>disqusShortname</b:widget-setting>
+<b:widget-setting name='link-0'></b:widget-setting>
+<b:widget-setting name='text-1'>commentsSystem</b:widget-setting>
+<b:widget-setting name='link-1'>blogger</b:widget-setting>
+<b:widget-setting name='text-2'>fixedSidebar</b:widget-setting>
+<b:widget-setting name='link-2'>true</b:widget-setting>
+<b:widget-setting name='text-3'>fixedMenu</b:widget-setting>
+<b:widget-setting name='link-3'>true</b:widget-setting>
+<b:widget-setting name='text-4'>postPerPage</b:widget-setting>
+<b:widget-setting name='link-4'>7</b:widget-setting>
+            </b:widget-settings>
         <b:includable id='main'>
           <b:include name='content'/>
         </b:includable>
@@ -4810,12 +4807,12 @@ var monthFormat = ["January", "February", "March", "April", "May", "June", "July
           <b:widget id='LinkList72' locked='true' title='Link List' type='LinkList' version='2' visible='true'>
             <b:widget-settings>
               <b:widget-setting name='sorting'>NONE</b:widget-setting>
-              <b:widget-setting name='text-1'>Sobre</b:widget-setting>
-              <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
-              <b:widget-setting name='text-0'>Home</b:widget-setting>
-              <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>
-              <b:widget-setting name='link-0'>/</b:widget-setting>
-              <b:widget-setting name='text-2'>Contato</b:widget-setting>
+    <b:widget-setting name='text-0'>Início</b:widget-setting>
+    <b:widget-setting name='link-0'>/</b:widget-setting>
+    <b:widget-setting name='text-1'>Sobre</b:widget-setting>
+    <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
+    <b:widget-setting name='text-2'>Contato</b:widget-setting>
+    <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>
             </b:widget-settings>
             <b:includable id='main'>
               <b:include name='content'/>
