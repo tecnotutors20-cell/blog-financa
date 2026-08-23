@@ -2,14 +2,9 @@ name: Publish Blogger content
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/publish-blogger.yml
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   publish:
@@ -17,8 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -26,27 +19,9 @@ jobs:
           python-version: '3.12'
 
       - name: Publish pages and posts to Blogger
-        id: blogger_publish
-        continue-on-error: true
         env:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
         run: python scripts/publish_blogger.py
-
-      - name: Record publication result
-        if: always()
-        env:
-          PUBLISH_OUTCOME: ${{ steps.blogger_publish.outcome }}
-        run: |
-          printf 'outcome=%s\nrun_id=%s\ncommit=%s\n' "$PUBLISH_OUTCOME" "$GITHUB_RUN_ID" "$GITHUB_SHA" > .blogger-publish-status
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .blogger-publish-status
-          git commit -m "Record Blogger publication attempt" || exit 0
-          git push origin main
-
-      - name: Fail job when Blogger publishing failed
-        if: steps.blogger_publish.outcome != 'success'
-        run: exit 1
