@@ -1,0 +1,105 @@
+name: Polish final Blogger theme locale
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/polish-theme.yml
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply final polish and validate XML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import xml.etree.ElementTree as ET
+
+          path = Path('theme-7997621208047243353.xml')
+          text = path.read_text(encoding='utf-8')
+
+          # Portuguese month names used by the theme's own date formatter.
+          text = text.replace(
+              'var monthFormat = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],',
+              'var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],'
+          )
+
+          # Remove DNS lookups for demo services that are not active.
+          for line in (
+              "    <link href='//connect.facebook.net' rel='dns-prefetch'/>\n",
+              "    <link href='//c.disquscdn.com' rel='dns-prefetch'/>\n",
+              "    <link href='//disqus.com' rel='dns-prefetch'/>\n",
+          ):
+              text = text.replace(line, '')
+
+          def replace_settings(widget_id, settings):
+              nonlocal_text = None
+              pattern = re.compile(
+                  rf"(?P<open><b:widget id='{re.escape(widget_id)}'[^>]*>\s*<b:widget-settings>).*?(?P<close></b:widget-settings>)",
+                  re.DOTALL,
+              )
+              match = pattern.search(text)
+              if not match:
+                  raise RuntimeError(f'Widget {widget_id} não encontrado')
+              return text[:match.start()] + match.group('open') + '\n' + settings.rstrip() + '\n            ' + match.group('close') + text[match.end():]
+
+          top_settings = """              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='text-0'>Início</b:widget-setting>
+              <b:widget-setting name='link-0'>/</b:widget-setting>
+              <b:widget-setting name='text-1'>Sobre</b:widget-setting>
+              <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
+              <b:widget-setting name='text-2'>Contato</b:widget-setting>
+              <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>"""
+          text = replace_settings('LinkList72', top_settings)
+
+          defaults = """          <b:widget-setting name='sorting'>NONE</b:widget-setting>
+          <b:widget-setting name='text-0'>disqusShortname</b:widget-setting>
+          <b:widget-setting name='link-0'></b:widget-setting>
+          <b:widget-setting name='text-1'>commentsSystem</b:widget-setting>
+          <b:widget-setting name='link-1'>blogger</b:widget-setting>
+          <b:widget-setting name='text-2'>fixedSidebar</b:widget-setting>
+          <b:widget-setting name='link-2'>true</b:widget-setting>
+          <b:widget-setting name='text-3'>fixedMenu</b:widget-setting>
+          <b:widget-setting name='link-3'>true</b:widget-setting>
+          <b:widget-setting name='text-4'>postPerPage</b:widget-setting>
+          <b:widget-setting name='link-4'>7</b:widget-setting>"""
+          text = replace_settings('LinkList71', defaults)
+
+          # Validate while tolerating legacy Blogger prefixes such as g:plusone.
+          declared = set(re.findall(r"xmlns:([A-Za-z_][\w.-]*)=", text))
+          ep = set(re.findall(r"</?([A-Za-z_][\w.-]*):[A-Za-z_]", text))
+          ap = set(re.findall(r"\s([A-Za-z_][\w.-]*):[A-Za-z_][\w.-]*\s*=", text))
+          missing = sorted((ep | ap) - declared - {'xml', 'xmlns'})
+          check = text
+          if missing:
+              attrs = ''.join(f" xmlns:{p}='urn:blogger-legacy:{p}'" for p in missing)
+              check = check.replace('<html ', '<html' + attrs + ' ', 1)
+          ET.fromstring(check)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit polished theme
+        run: |
+          if git diff --quiet -- theme-7997621208047243353.xml; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add theme-7997621208047243353.xml
+          git commit -m "Polish Blogger theme locale and defaults"
+          git push origin main
