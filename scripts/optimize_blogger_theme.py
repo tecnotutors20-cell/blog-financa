@@ -12,6 +12,29 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     return text.replace(old, new, 1)
 
 
+def validate_blogger_xml(text: str) -> None:
+    """Valida o XML sem rejeitar namespaces legados que o Blogger tolera.
+
+    Alguns templates antigos usam tags como <g:plusone> sem declarar xmlns:g.
+    Isso já existe no arquivo original e o Blogger aceita. Para validar a estrutura
+    sem mascarar erros novos, declaramos apenas namespaces ausentes numa cópia
+    temporária antes de passar o texto ao parser XML.
+    """
+    declared = set(re.findall(r"xmlns:([A-Za-z_][\w.-]*)=", text))
+    element_prefixes = set(re.findall(r"</?([A-Za-z_][\w.-]*):[A-Za-z_]", text))
+    attribute_prefixes = set(re.findall(r"\s([A-Za-z_][\w.-]*):[A-Za-z_][\w.-]*\s*=", text))
+    missing = sorted((element_prefixes | attribute_prefixes) - declared - {"xml", "xmlns"})
+
+    validation_text = text
+    if missing:
+        namespace_attrs = "".join(
+            f" xmlns:{prefix}='urn:blogger-legacy:{prefix}'" for prefix in missing
+        )
+        validation_text = validation_text.replace("<html ", "<html" + namespace_attrs + " ", 1)
+
+    ET.fromstring(validation_text)
+
+
 def main() -> None:
     text = THEME.read_text(encoding="utf-8")
     original = text
@@ -75,8 +98,8 @@ def main() -> None:
     )
     text = publisher_pattern.sub(publisher_replacement, text, count=1)
 
-    # 6) Pequena melhoria de acessibilidade para navegação por teclado.
-    # O tema remove outline de muitos elementos no reset; restauramos foco visível.
+    # 6) Restaurar foco visível para navegação por teclado.
+    # O reset do tema remove outline de vários elementos.
     skin_end = "]]></b:skin>"
     focus_css = """
 /* SEO/UX: foco visível para navegação por teclado */
@@ -91,8 +114,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     if text == original:
         raise RuntimeError("Nenhuma alteração foi aplicada")
 
-    # O template Blogger é XML; falhar aqui impede commit de arquivo malformado.
-    ET.fromstring(text)
+    # Validação estrutural antes de escrever o arquivo alterado.
+    validate_blogger_xml(text)
     THEME.write_text(text, encoding="utf-8")
     print("Tema otimizado e XML validado com sucesso.")
 
