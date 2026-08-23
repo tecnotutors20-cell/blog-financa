@@ -39,3 +39,5 @@ jobs:
           git add theme-7997621208047243353.xml
           git commit -m "Apply SEO and accessibility optimizations to Blogger theme"
           git push origin HEAD:seo-adsense-optimization
+
+# one-shot trigger: 2026-08-23
