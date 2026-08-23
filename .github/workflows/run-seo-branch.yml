@@ -1,17 +1,17 @@
 name: Apply SEO optimization branch
 
 on:
-  push:
+  pull_request:
     branches:
       - main
-    paths:
-      - .github/workflows/run-seo-branch.yml
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
 
 jobs:
   apply:
+    if: github.head_ref == 'seo-adsense-optimization'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout SEO branch
@@ -39,5 +39,3 @@ jobs:
           git add theme-7997621208047243353.xml
           git commit -m "Apply SEO and accessibility optimizations to Blogger theme"
           git push origin HEAD:seo-adsense-optimization
-
-# one-shot trigger: 2026-08-23
