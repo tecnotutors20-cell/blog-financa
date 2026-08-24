@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "strategy": "Um artigo pilar pela manhã e duas long tails relacionadas à tarde/noite; alternar clusters por dia e priorizar intenção de busca específica.",
+  "clusters": [
+    {
+      "name": "Cartões de crédito",
+      "existing": [
+        "Cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros"
+      ],
+      "next_long_tails": [
+        "Compra feita no dia do fechamento do cartão cai em qual fatura?",
+        "Pagar a fatura antes do fechamento libera limite?",
+        "Cartão cancelado com parcelas em aberto: o que acontece?"
+      ]
+    },
+    {
+      "name": "Bancos e Pix",
+      "existing": [
+        "Conta digital ou banco tradicional: como escolher a melhor opção para você",
+        "Pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas"
+      ],
+      "next_long_tails": [
+        "Pix enviado para a pessoa errada: o que fazer?",
+        "Conta digital pode bloquear dinheiro? Entenda quando isso acontece",
+        "Pix agendado pode ser cancelado?"
+      ]
+    },
+    {
+      "name": "Crédito e score",
+      "existing": [
+        "Score de crédito: o que influencia e como melhorar sem cair em promessas"
+      ],
+      "next_long_tails": [
+        "Consultar o score várias vezes diminui a pontuação?",
+        "Por que meu score aumentou mas o banco não aprovou crédito?",
+        "Quanto tempo depois de pagar uma dívida o score pode mudar?"
+      ]
+    },
+    {
+      "name": "Dívidas",
+      "existing": [
+        "Como sair das dívidas: um método prático para priorizar e negociar"
+      ],
+      "next_long_tails": [
+        "Vale a pena pegar empréstimo para pagar cartão de crédito?",
+        "Como priorizar dívidas quando não dá para pagar todas?",
+        "Dívida negociada pode voltar se eu atrasar o acordo?"
+      ]
+    },
+    {
+      "name": "Organização financeira",
+      "existing": [
+        "Como organizar a vida financeira do zero: um plano em 7 etapas"
+      ],
+      "next_long_tails": [
+        "Como montar um orçamento mensal simples sem planilha complicada",
+        "Quanto da renda deve sobrar no fim do mês?",
+        "Como separar dinheiro para contas anuais e imprevistos?"
+      ]
+    },
+    {
+      "name": "Reserva e renda fixa",
+      "existing": [
+        "Reserva de emergência: como calcular, montar e onde guardar",
+        "Renda fixa para iniciantes: 8 conceitos que você precisa entender antes de investir"
+      ],
+      "next_long_tails": [
+        "CDB com liquidez diária serve para reserva de emergência?",
+        "Tesouro Selic pode perder dinheiro se resgatar antes?",
+        "Quanto guardar por mês para formar R$ 10 mil de reserva?"
+      ]
+    },
+    {
+      "name": "Segurança financeira",
+      "existing": [
+        "Pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas"
+      ],
+      "next_long_tails": [
+        "Fiz um Pix após cair em golpe: quais passos tomar imediatamente?",
+        "Celular roubado: como proteger contas bancárias rapidamente?",
+        "Como identificar falso atendimento de banco no WhatsApp?"
+      ]
+    }
+  ]
+}

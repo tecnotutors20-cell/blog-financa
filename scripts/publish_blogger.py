@@ -116,12 +116,24 @@ def render(text: str, blog_name: str) -> str:
     return text.replace("{{BLOG_NAME}}", blog_name)
 
 
+def editorial_author_box() -> str:
+    return (
+        "<!-- guia-do-bolso-author -->"
+        "<aside class='guia-author-box' style='background:#f5f7f9;border:1px solid #e1e6ea;border-radius:10px;margin:0 0 24px;padding:14px 16px'>"
+        "<strong>Por Equipe Editorial do Guia Do Bolso</strong>"
+        "<p style='margin:6px 0 0'>Conteúdo educativo produzido com critérios editoriais, fontes confiáveis e transparência sobre o uso de tecnologia. "
+        "<a href='/p/equipe-editorial.html'>Conheça nossa autoria e metodologia editorial</a>.</p>"
+        "</aside>"
+    )
+
+
 def render_post_content(post: dict, blog_name: str) -> str:
     title = post["title"].strip()
     content = render(post["content"], blog_name)
+    author_html = editorial_author_box()
     cover = COVER_BY_TITLE.get(title.casefold())
     if not cover:
-        return content
+        return author_html + content
     alt = html.escape(title, quote=True)
     cover_html = (
         "<!-- guia-do-bolso-cover -->"
@@ -130,7 +142,7 @@ def render_post_content(post: dict, blog_name: str) -> str:
         f"src='{cover}' style='border-radius:12px;height:auto;max-width:100%;width:1200px'/>"
         "</div>"
     )
-    return cover_html + content
+    return cover_html + author_html + content
 
 
 POST_URL_PATTERN = re.compile(r"\{\{POST_URL\|(.+?)\}\}")
