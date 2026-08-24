@@ -28,7 +28,7 @@
 <b:skin version='1.0.0'><![CDATA[/* 
 -----------------------------------------------
 Blogger Template Style
-Name:        TopSEO
+Name:        Guia Do Bolso
 License:     Free Version
 Version:     1.0
 Author:      TemplatesYard
@@ -4864,13 +4864,13 @@ var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "
           <b:section class='header-logo' id='header-logo' maxwidgets='1' name='Header Logo' showaddelement='yes'>
             <b:widget id='Header1' locked='true' title='Guia Do Bolso (Cabeçalho)' type='Header' version='2' visible='true'>
               <b:widget-settings>
-                <b:widget-setting name='displayUrl'>https://blogger.googleusercontent.com/img/a/AVvXsEibp5JpSL0oGvMw8cw-jqiJR7tKtd7u8O9kfPhTlEfFiH47BHPWz54KkcKHK4EOAqnZWipIjtbbl17Wxkeg6cLEsXAJS86nxYxMOmGvy3zssP-fXDAo4CjOyD3phjVLYwjpCfEQleUv253HhVLRNUN7Bqw7IwUZ7dlqKEY3t3M3ytW93bT5Dpv9tNKS7GM-=s189</b:widget-setting>
-                <b:widget-setting name='displayHeight'>47</b:widget-setting>
-                <b:widget-setting name='sectionWidth'>150</b:widget-setting>
+                <b:widget-setting name='displayUrl'>https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/logo-guia-do-bolso.png</b:widget-setting>
+                <b:widget-setting name='displayHeight'>50</b:widget-setting>
+                <b:widget-setting name='sectionWidth'>230</b:widget-setting>
                 <b:widget-setting name='useImage'>true</b:widget-setting>
                 <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
                 <b:widget-setting name='imagePlacement'>REPLACE</b:widget-setting>
-                <b:widget-setting name='displayWidth'>189</b:widget-setting>
+                <b:widget-setting name='displayWidth'>220</b:widget-setting>
               </b:widget-settings>
               <b:includable id='main' var='this'>
       <div class='header-widget'>
@@ -4896,7 +4896,7 @@ var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "
   </b:includable>
               <b:includable id='image'>
       <a class='header-image-wrapper' expr:href='data:blog.homepageUrl'>
-        <img expr:alt='data:blog.title.escaped' expr:data-height='data:height' expr:data-width='data:width' expr:src='data:image'/>
+        <img alt='Guia Do Bolso' data-height='50' data-width='220' src='https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/logo-guia-do-bolso.png'/>
       </a>
     </b:includable>
               <b:includable id='title'>
@@ -4994,8 +4994,6 @@ var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "
                <b:widget-setting name='link-4'>/search/label/Economia</b:widget-setting>
                <b:widget-setting name='text-5'>Renda Extra</b:widget-setting>
                <b:widget-setting name='link-5'>/search/label/Renda%20Extra</b:widget-setting>
-               <b:widget-setting name='text-6'>Sobre</b:widget-setting>
-               <b:widget-setting name='link-6'>/p/sobre.html</b:widget-setting>
             </b:widget-settings>
              <b:includable id='main'>
               <b:include name='content'/>
