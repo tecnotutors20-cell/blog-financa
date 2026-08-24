@@ -27,6 +27,8 @@ COVER_BY_TITLE = {
     "renda fixa para iniciantes: 8 conceitos que você precisa entender antes de investir": f"{COVER_BASE}/renda-fixa.jpg",
     "como sair das dívidas: um método prático para priorizar e negociar": f"{COVER_BASE}/sair-das-dividas.jpg",
     "pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas": f"{COVER_BASE}/pix-seguranca.jpg",
+    "fechamento da fatura do cartão: como funciona e qual é o melhor dia para comprar?": f"{COVER_BASE}/cartao-credito.jpg",
+    "compra feita no dia do fechamento do cartão cai em qual fatura?": f"{COVER_BASE}/cartao-credito.jpg",
 }
 
 
