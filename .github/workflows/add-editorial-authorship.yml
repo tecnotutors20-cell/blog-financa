@@ -1,0 +1,116 @@
+name: Add editorial authorship and SEO clusters
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/add-editorial-authorship.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Add editorial page, author box and cluster map
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          pages_path = Path('content/blogger_pages.json')
+          pages = json.loads(pages_path.read_text(encoding='utf-8'))
+
+          editorial_content = """<h2>Equipe Editorial do Guia Do Bolso</h2><p>A assinatura <strong>Equipe Editorial do Guia Do Bolso</strong> identifica a responsabilidade editorial pelos conteúdos publicados neste portal. Ela não representa uma credencial profissional individual nem significa que o site substitua contador, advogado, planejador financeiro, assessor de investimentos ou outro profissional habilitado.</p><h2>Nossa missão</h2><p>Produzir conteúdo de educação financeira claro, útil e responsável sobre orçamento, bancos, cartões, crédito, dívidas, Pix, segurança financeira, renda fixa e investimentos. O objetivo é ajudar o leitor a entender conceitos, riscos, custos e alternativas antes de tomar decisões.</p><h2>Como os conteúdos são produzidos</h2><p>A pauta é definida a partir de dúvidas reais de usuários, intenção de busca, relevância prática e necessidade de explicar temas financeiros com mais clareza. A estrutura dos artigos busca responder a pergunta principal logo no início e aprofundar o assunto com exemplos, cuidados, perguntas frequentes e referências.</p><h2>Fontes que priorizamos</h2><p>Quando uma informação depende de regra, produto regulado, tributação, segurança ou orientação institucional, priorizamos fontes primárias e oficiais, como Banco Central do Brasil, Comissão de Valores Mobiliários, Receita Federal, Tesouro Direto, Portal do Investidor, Fundo Garantidor de Créditos, gov.br e páginas oficiais das instituições citadas.</p><h2>Uso de tecnologia e inteligência artificial</h2><p>Ferramentas digitais e de inteligência artificial podem auxiliar pesquisa, organização, estruturação, redação e revisão. O uso dessas ferramentas não altera o padrão editorial: informações financeiras relevantes devem ser confrontadas com fontes confiáveis, e o conteúdo não deve inventar taxas, regras, garantias ou resultados.</p><p>O objetivo da tecnologia é tornar a produção mais eficiente e ampliar a cobertura de dúvidas úteis, não produzir páginas repetitivas, textos para manipular mecanismos de busca ou conteúdo sem valor adicional.</p><h2>Atualizações e correções</h2><p>Finanças mudam. Taxas, tarifas, regras, benefícios e produtos podem ser alterados. Por isso, conteúdos podem ser revisados e atualizados. Se uma informação factual estiver incorreta ou desatualizada, ela deve ser corrigida quando a mudança for confirmada por fonte adequada.</p><h2>Independência editorial</h2><p>Publicidade, patrocínio ou relação de afiliado, quando existirem, não devem determinar a conclusão de uma análise. Relações comerciais relevantes devem ser identificadas, e o conteúdo editorial deve permanecer distinguível de publicidade.</p><h2>O que não prometemos</h2><ul><li>Retorno garantido em investimento.</li><li>Aprovação de cartão, empréstimo ou financiamento.</li><li>Aumento garantido de score ou limite.</li><li>Resultado financeiro individual.</li><li>Produto universalmente melhor para todas as pessoas.</li></ul><h2>Responsabilidade do leitor</h2><p>O conteúdo do Guia Do Bolso é educativo e informativo. Antes de contratar um produto financeiro, confirme condições, taxas, riscos e documentos diretamente com a instituição responsável. Quando uma decisão exigir análise individual, procure profissional devidamente habilitado.</p><h2>Transparência</h2><p>Para entender melhor nossos critérios, consulte também a <a href='/p/politica-editorial.html'>Política Editorial</a>, o <a href='/p/aviso-financeiro.html'>Aviso Financeiro</a>, a <a href='/p/politica-de-privacidade.html'>Política de Privacidade</a> e a página <a href='/p/sobre.html'>Sobre</a>.</p>"""
+
+          found = False
+          for page in pages:
+              if page.get('title','').strip().casefold() == 'equipe editorial'.casefold():
+                  page['content'] = editorial_content
+                  found = True
+                  break
+          if not found:
+              pages.append({'title':'Equipe Editorial','content':editorial_content})
+
+          for page in pages:
+              if page.get('title','').strip().casefold() == 'sobre':
+                  marker = "<h2>Quem assina os conteúdos</h2>"
+                  if marker not in page['content']:
+                      page['content'] += marker + "<p>Os artigos são assinados pela <a href='/p/equipe-editorial.html'><strong>Equipe Editorial do Guia Do Bolso</strong></a>, identidade responsável pelo processo editorial do portal. A página de autoria explica nossas fontes, uso de tecnologia, critérios de atualização e limites do conteúdo.</p>"
+
+          pages_path.write_text(json.dumps(pages, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          clusters = {
+            'version': 1,
+            'strategy': 'Um artigo pilar pela manhã e duas long tails relacionadas à tarde/noite; alternar clusters por dia e priorizar intenção de busca específica.',
+            'clusters': [
+              {'name':'Cartões de crédito','existing':['Cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros'],'next_long_tails':['Compra feita no dia do fechamento do cartão cai em qual fatura?','Pagar a fatura antes do fechamento libera limite?','Cartão cancelado com parcelas em aberto: o que acontece?']},
+              {'name':'Bancos e Pix','existing':['Conta digital ou banco tradicional: como escolher a melhor opção para você','Pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas'],'next_long_tails':['Pix enviado para a pessoa errada: o que fazer?','Conta digital pode bloquear dinheiro? Entenda quando isso acontece','Pix agendado pode ser cancelado?']},
+              {'name':'Crédito e score','existing':['Score de crédito: o que influencia e como melhorar sem cair em promessas'],'next_long_tails':['Consultar o score várias vezes diminui a pontuação?','Por que meu score aumentou mas o banco não aprovou crédito?','Quanto tempo depois de pagar uma dívida o score pode mudar?']},
+              {'name':'Dívidas','existing':['Como sair das dívidas: um método prático para priorizar e negociar'],'next_long_tails':['Vale a pena pegar empréstimo para pagar cartão de crédito?','Como priorizar dívidas quando não dá para pagar todas?','Dívida negociada pode voltar se eu atrasar o acordo?']},
+              {'name':'Organização financeira','existing':['Como organizar a vida financeira do zero: um plano em 7 etapas'],'next_long_tails':['Como montar um orçamento mensal simples sem planilha complicada','Quanto da renda deve sobrar no fim do mês?','Como separar dinheiro para contas anuais e imprevistos?']},
+              {'name':'Reserva e renda fixa','existing':['Reserva de emergência: como calcular, montar e onde guardar','Renda fixa para iniciantes: 8 conceitos que você precisa entender antes de investir'],'next_long_tails':['CDB com liquidez diária serve para reserva de emergência?','Tesouro Selic pode perder dinheiro se resgatar antes?','Quanto guardar por mês para formar R$ 10 mil de reserva?']},
+              {'name':'Segurança financeira','existing':['Pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas'],'next_long_tails':['Fiz um Pix após cair em golpe: quais passos tomar imediatamente?','Celular roubado: como proteger contas bancárias rapidamente?','Como identificar falso atendimento de banco no WhatsApp?']}
+            ]
+          }
+          Path('content/seo_clusters.json').write_text(json.dumps(clusters, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          publisher_path = Path('scripts/publish_blogger.py')
+          text = publisher_path.read_text(encoding='utf-8')
+          start = text.index('def render_post_content(')
+          end = text.index('POST_URL_PATTERN', start)
+          new_block = '''def editorial_author_box() -> str:\n    return (\n        "<!-- guia-do-bolso-author -->"\n        "<aside class='guia-author-box' style='background:#f5f7f9;border:1px solid #e1e6ea;border-radius:10px;margin:0 0 24px;padding:14px 16px'>"\n        "<strong>Por Equipe Editorial do Guia Do Bolso</strong>"\n        "<p style='margin:6px 0 0'>Conteúdo educativo produzido com critérios editoriais, fontes confiáveis e transparência sobre o uso de tecnologia. "\n        "<a href='/p/equipe-editorial.html'>Conheça nossa autoria e metodologia editorial</a>.</p>"\n        "</aside>"\n    )\n\n\ndef render_post_content(post: dict, blog_name: str) -> str:\n    title = post["title"].strip()\n    content = render(post["content"], blog_name)\n    author_html = editorial_author_box()\n    cover = COVER_BY_TITLE.get(title.casefold())\n    if not cover:\n        return author_html + content\n    alt = html.escape(title, quote=True)\n    cover_html = (\n        "<!-- guia-do-bolso-cover -->"\n        "<div class='separator' style='clear:both;margin:0 0 24px;text-align:center'>"\n        f"<img alt='{alt}' data-original-height='630' data-original-width='1200' "\n        f"src='{cover}' style='border-radius:12px;height:auto;max-width:100%;width:1200px'/>"\n        "</div>"\n    )\n    return cover_html + author_html + content\n\n\n'''
+          text = text[:start] + new_block + text[end:]
+          publisher_path.write_text(text, encoding='utf-8')
+
+          theme_path = Path('theme-7997621208047243353.xml')
+          theme = theme_path.read_text(encoding='utf-8')
+          theme = theme.replace("<b:widget-setting name='showAuthor'>true</b:widget-setting>", "<b:widget-setting name='showAuthor'>false</b:widget-setting>")
+          theme_path.write_text(theme, encoding='utf-8')
+          PY
+
+      - name: Commit editorial structure
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/blogger_pages.json content/seo_clusters.json scripts/publish_blogger.py theme-7997621208047243353.xml
+          git commit -m "Add transparent editorial authorship and SEO clusters" || true
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Publish authorship to Blogger
+        id: publish
+        continue-on-error: true
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          sleep 5
+          python scripts/publish_blogger.py
+
+      - name: Record result
+        if: always()
+        env:
+          RESULT: ${{ steps.publish.outcome }}
+        run: |
+          printf 'outcome=%s\nrun_id=%s\n' "$RESULT" "$GITHUB_RUN_ID" > .editorial-authorship-status
+          git pull --rebase origin main
+          git add .editorial-authorship-status
+          git commit -m "Record editorial authorship publication result" || true
+          git push origin main
+
+      - name: Fail when publication failed
+        if: steps.publish.outcome != 'success'
+        run: exit 1
