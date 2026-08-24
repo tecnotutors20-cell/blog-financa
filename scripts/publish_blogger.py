@@ -2,6 +2,7 @@
 import html
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -132,6 +133,15 @@ def render_post_content(post: dict, blog_name: str) -> str:
     return cover_html + content
 
 
+POST_URL_PATTERN = re.compile(r"\{\{POST_URL\|(.+?)\}\}")
+
+def resolve_post_urls(content: str, url_by_title: dict) -> str:
+    def repl(match):
+        title = match.group(1).strip().casefold()
+        return html.escape(url_by_title.get(title, "#"), quote=True)
+    return POST_URL_PATTERN.sub(repl, content)
+
+
 def normalized_labels(labels):
     return sorted(str(label).strip().casefold() for label in (labels or []))
 
@@ -188,10 +198,11 @@ def upsert_posts(token: str, blog_id: str, blog_name: str):
     posts = json.loads(POSTS_FILE.read_text(encoding="utf-8"))
     existing = load_all_posts(token, blog_id)
     by_title = {item.get("title", "").strip().casefold(): item for item in existing}
+    url_by_title = {key: item.get("url", "#") for key, item in by_title.items()}
 
     for post in posts:
         title = post["title"].strip()
-        rendered_content = render_post_content(post, blog_name)
+        rendered_content = resolve_post_urls(render_post_content(post, blog_name), url_by_title)
         labels = post.get("labels", [])
         payload = {
             "title": title,
