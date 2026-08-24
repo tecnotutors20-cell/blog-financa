@@ -1,0 +1,10 @@
+--- match line 31 ---
+27: <!-- Template Style CSS -->
+28: <b:skin version='1.0.0'><![CDATA[/* 
+29: -----------------------------------------------
+30: Blogger Template Style
+31: Name:        TopSEO
+32: License:     Free Version
+33: Version:     1.0
+34: Author:      TemplatesYard
+35: Author Url:  https://www.templatesyard.com/
