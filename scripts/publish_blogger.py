@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import html
 import json
 import os
 import sys
@@ -15,6 +16,17 @@ PAGES_FILE = ROOT / "content" / "blogger_pages.json"
 POSTS_FILE = ROOT / "content" / "blogger_posts.json"
 WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
+COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers"
+COVER_BY_TITLE = {
+    "como organizar a vida financeira do zero: um plano em 7 etapas": f"{COVER_BASE}/organizar-vida-financeira.png",
+    "reserva de emergência: como calcular, montar e onde guardar": f"{COVER_BASE}/reserva-emergencia.png",
+    "cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros": f"{COVER_BASE}/cartao-credito.png",
+    "score de crédito: o que influencia e como melhorar sem cair em promessas": f"{COVER_BASE}/score-credito.png",
+    "conta digital ou banco tradicional: como escolher a melhor opção para você": f"{COVER_BASE}/conta-digital-banco.png",
+    "renda fixa para iniciantes: 8 conceitos que você precisa entender antes de investir": f"{COVER_BASE}/renda-fixa.png",
+    "como sair das dívidas: um método prático para priorizar e negociar": f"{COVER_BASE}/sair-das-dividas.png",
+    "pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas": f"{COVER_BASE}/pix-seguranca.png",
+}
 
 
 def required_env(name: str) -> str:
@@ -103,6 +115,23 @@ def render(text: str, blog_name: str) -> str:
     return text.replace("{{BLOG_NAME}}", blog_name)
 
 
+def render_post_content(post: dict, blog_name: str) -> str:
+    title = post["title"].strip()
+    content = render(post["content"], blog_name)
+    cover = COVER_BY_TITLE.get(title.casefold())
+    if not cover:
+        return content
+    alt = html.escape(title, quote=True)
+    cover_html = (
+        "<!-- guia-do-bolso-cover -->"
+        "<div class='separator' style='clear:both;margin:0 0 24px;text-align:center'>"
+        f"<img alt='{alt}' data-original-height='630' data-original-width='1200' "
+        f"src='{cover}' style='border-radius:12px;height:auto;max-width:100%;width:1200px'/>"
+        "</div>"
+    )
+    return cover_html + content
+
+
 def normalized_labels(labels):
     return sorted(str(label).strip().casefold() for label in (labels or []))
 
@@ -162,7 +191,7 @@ def upsert_posts(token: str, blog_id: str, blog_name: str):
 
     for post in posts:
         title = post["title"].strip()
-        rendered_content = render(post["content"], blog_name)
+        rendered_content = render_post_content(post, blog_name)
         labels = post.get("labels", [])
         payload = {
             "title": title,
