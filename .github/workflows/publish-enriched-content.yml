@@ -1,0 +1,50 @@
+name: Publish enriched finance content
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-enriched-content.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Publish to Blogger
+        id: publish
+        continue-on-error: true
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python scripts/publish_blogger.py
+
+      - name: Record result
+        if: always()
+        env:
+          RESULT: ${{ steps.publish.outcome }}
+        run: |
+          printf 'outcome=%s\nrun_id=%s\n' "$RESULT" "$GITHUB_RUN_ID" > .enriched-publish-status
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add .enriched-publish-status
+          git commit -m "Record enriched Blogger publication result" || true
+          git push origin main
+
+      - name: Fail when Blogger publish failed
+        if: steps.publish.outcome != 'success'
+        run: exit 1
