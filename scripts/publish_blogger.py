@@ -16,16 +16,16 @@ PAGES_FILE = ROOT / "content" / "blogger_pages.json"
 POSTS_FILE = ROOT / "content" / "blogger_posts.json"
 WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
-COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers"
+COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
-    "como organizar a vida financeira do zero: um plano em 7 etapas": f"{COVER_BASE}/organizar-vida-financeira.png",
-    "reserva de emergência: como calcular, montar e onde guardar": f"{COVER_BASE}/reserva-emergencia.png",
-    "cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros": f"{COVER_BASE}/cartao-credito.png",
-    "score de crédito: o que influencia e como melhorar sem cair em promessas": f"{COVER_BASE}/score-credito.png",
-    "conta digital ou banco tradicional: como escolher a melhor opção para você": f"{COVER_BASE}/conta-digital-banco.png",
-    "renda fixa para iniciantes: 8 conceitos que você precisa entender antes de investir": f"{COVER_BASE}/renda-fixa.png",
-    "como sair das dívidas: um método prático para priorizar e negociar": f"{COVER_BASE}/sair-das-dividas.png",
-    "pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas": f"{COVER_BASE}/pix-seguranca.png",
+    "como organizar a vida financeira do zero: um plano em 7 etapas": f"{COVER_BASE}/organizar-vida-financeira.jpg",
+    "reserva de emergência: como calcular, montar e onde guardar": f"{COVER_BASE}/reserva-emergencia.jpg",
+    "cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros": f"{COVER_BASE}/cartao-credito.jpg",
+    "score de crédito: o que influencia e como melhorar sem cair em promessas": f"{COVER_BASE}/score-credito.jpg",
+    "conta digital ou banco tradicional: como escolher a melhor opção para você": f"{COVER_BASE}/conta-digital-banco.jpg",
+    "renda fixa para iniciantes: 8 conceitos que você precisa entender antes de investir": f"{COVER_BASE}/renda-fixa.jpg",
+    "como sair das dívidas: um método prático para priorizar e negociar": f"{COVER_BASE}/sair-das-dividas.jpg",
+    "pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas": f"{COVER_BASE}/pix-seguranca.jpg",
 }
 
 
