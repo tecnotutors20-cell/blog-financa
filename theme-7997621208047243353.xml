@@ -4943,12 +4943,12 @@ var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "
       <b:section class='mobile-logo' id='mobile-logo' maxwidgets='1' name='Mobile Logo' showaddelement='yes'>
         <b:widget id='Image70' locked='true' title='Mobile Logo Settings' type='Image' version='2' visible='true'>
           <b:widget-settings>
-            <b:widget-setting name='displayUrl'>https://blogger.googleusercontent.com/img/a/AVvXsEhX2XxasrIxGt1iEACYHnJTOD70xin6xZHdCRfH4gpWXzxy8noFtZj2o6YTWbYKWXDodmUg1TUJHwvdw6ARQIGRbCPljZkIwo0nUxNraBKEHckUurPUX2_1YjOo6nHL7pE8GODYCxYPfZ6fyJf2mOS2E8Rae6yjJXDI275i_gmJwg-E1a_9BFKcLa9obCl0=s189</b:widget-setting>
-            <b:widget-setting name='displayHeight'>47</b:widget-setting>
-            <b:widget-setting name='sectionWidth'>150</b:widget-setting>
+            <b:widget-setting name='displayUrl'>https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/logo-guia-do-bolso.png</b:widget-setting>
+            <b:widget-setting name='displayHeight'>50</b:widget-setting>
+            <b:widget-setting name='sectionWidth'>230</b:widget-setting>
             <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
-            <b:widget-setting name='displayWidth'>189</b:widget-setting>
-            <b:widget-setting name='link'>My Title</b:widget-setting>
+            <b:widget-setting name='displayWidth'>220</b:widget-setting>
+            <b:widget-setting name='link'>Guia Do Bolso</b:widget-setting>
             <b:widget-setting name='caption'>image</b:widget-setting>
           </b:widget-settings>
           <b:includable id='main'>
@@ -4957,7 +4957,7 @@ var monthFormat = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "
           <b:includable id='content'>
             <div class='logo-content'>
               <b:if cond='data:caption == &quot;image&quot;'>
-                <a expr:href='data:blog.homepageUrl'><img expr:alt='data:blog.title' expr:src='data:sourceUrl'/></a>
+                <a expr:href='data:blog.homepageUrl'><img alt='Guia Do Bolso' src='https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/logo-guia-do-bolso.png'/></a>
                 <b:elseif cond='data:caption == &quot;custom&quot;'/>
                 <b:if cond='data:link'>
                   <h3><a expr:href='data:blog.homepageUrl'><data:link/></a></h3>
