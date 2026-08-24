@@ -5,11 +5,11 @@
     {
       "name": "Cartões de crédito",
       "existing": [
-        "Cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros"
+        "Cartão de crédito: como funciona a fatura, o pagamento mínimo e os juros",
+        "Pagar a fatura antes do fechamento libera limite? Entenda como funciona"
       ],
       "next_long_tails": [
         "Compra feita no dia do fechamento do cartão cai em qual fatura?",
-        "Pagar a fatura antes do fechamento libera limite?",
         "Cartão cancelado com parcelas em aberto: o que acontece?"
       ]
     },
