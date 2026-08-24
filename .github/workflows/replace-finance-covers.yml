@@ -1,0 +1,174 @@
+name: Replace finance post covers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/replace-finance-covers.yml
+
+permissions:
+  contents: write
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install image dependency
+        run: python -m pip install pillow
+
+      - name: Build varied finance covers
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from io import BytesIO
+          import json
+          import urllib.request
+          from PIL import Image, ImageOps, ImageEnhance
+
+          out = Path('assets/covers-real')
+          out.mkdir(parents=True, exist_ok=True)
+
+          sources = {
+              'organizar-vida-financeira.jpg': {
+                  'image': 'https://images.pexels.com/photos/6962992/pexels-photo-6962992.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/woman-budgeting-her-bills-6962992/',
+                  'photographer': 'Mikhail Nilov',
+                  'centering': [0.50, 0.43],
+              },
+              'reserva-emergencia.jpg': {
+                  'image': 'https://images.pexels.com/photos/9821387/pexels-photo-9821387.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/clear-glass-jar-with-silver-coins-9821387/',
+                  'photographer': 'Towfiqu barbhuiya',
+                  'centering': [0.50, 0.50],
+              },
+              'cartao-credito.jpg': {
+                  'image': 'https://images.pexels.com/photos/9304427/pexels-photo-9304427.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/a-person-holding-a-payment-terminal-9304427/',
+                  'photographer': 'Mikhail Nilov',
+                  'centering': [0.48, 0.48],
+              },
+              'score-credito.jpg': {
+                  'image': 'https://images.pexels.com/photos/19867473/pexels-photo-19867473/free-photo-of-credit-score-and-credit-report.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/credit-score-and-credit-report-19867473/',
+                  'photographer': 'Markus Winkler',
+                  'centering': [0.50, 0.50],
+              },
+              'conta-digital-banco.jpg': {
+                  'image': 'https://images.pexels.com/photos/6406691/pexels-photo-6406691.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/digital-wallet-app-on-smartphone-6406691/',
+                  'photographer': 'Tranmautritam',
+                  'centering': [0.46, 0.50],
+              },
+              'renda-fixa.jpg': {
+                  'image': 'https://images.pexels.com/photos/7567486/pexels-photo-7567486.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/graph-displayed-on-laptop-screen-7567486/',
+                  'photographer': 'Tima Miroshnichenko',
+                  'centering': [0.48, 0.50],
+              },
+              'sair-das-dividas.jpg': {
+                  'image': 'https://images.pexels.com/photos/7927400/pexels-photo-7927400.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/unpaid-bills-on-a-table-and-a-distraught-man-in-background-7927400/',
+                  'photographer': 'Nicola Barts',
+                  'centering': [0.50, 0.55],
+              },
+              'pix-seguranca.jpg': {
+                  'image': 'https://images.pexels.com/photos/12935064/pexels-photo-12935064.jpeg?auto=compress&dpr=1&h=900&w=1600',
+                  'page': 'https://www.pexels.com/photo/a-close-up-shot-of-a-person-scanning-a-qr-code-12935064/',
+                  'photographer': 'iMin Technology',
+                  'centering': [0.50, 0.50],
+              },
+          }
+
+          headers = {'User-Agent': 'Mozilla/5.0 (compatible; GuiaDoBolso/1.0)'}
+          for filename, meta in sources.items():
+              req = urllib.request.Request(meta['image'], headers=headers)
+              with urllib.request.urlopen(req, timeout=60) as r:
+                  data = r.read()
+              img = Image.open(BytesIO(data))
+              img = ImageOps.exif_transpose(img).convert('RGB')
+              img = ImageOps.fit(
+                  img,
+                  (1200, 630),
+                  method=Image.Resampling.LANCZOS,
+                  centering=tuple(meta['centering']),
+              )
+              img = ImageEnhance.Contrast(img).enhance(1.03)
+              img = ImageEnhance.Sharpness(img).enhance(1.04)
+              img.save(out / filename, 'JPEG', quality=88, optimize=True, progressive=True)
+
+          # Keep a private provenance list in the repository for future replacements.
+          provenance = {
+              name: {'source_page': meta['page'], 'photographer': meta['photographer']}
+              for name, meta in sources.items()
+          }
+          Path('content/cover_sources.json').write_text(
+              json.dumps(provenance, ensure_ascii=False, indent=2) + '\n',
+              encoding='utf-8',
+          )
+
+          # Point the Blogger publisher at the new photo covers.
+          publisher = Path('scripts/publish_blogger.py')
+          text = publisher.read_text(encoding='utf-8')
+          text = text.replace(
+              'COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers"',
+              'COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"',
+          )
+          replacements = {
+              'organizar-vida-financeira.png': 'organizar-vida-financeira.jpg',
+              'reserva-emergencia.png': 'reserva-emergencia.jpg',
+              'cartao-credito.png': 'cartao-credito.jpg',
+              'score-credito.png': 'score-credito.jpg',
+              'conta-digital-banco.png': 'conta-digital-banco.jpg',
+              'renda-fixa.png': 'renda-fixa.jpg',
+              'sair-das-dividas.png': 'sair-das-dividas.jpg',
+              'pix-seguranca.png': 'pix-seguranca.jpg',
+          }
+          for old, new in replacements.items():
+              text = text.replace(old, new)
+          publisher.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit new photo covers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/covers-real content/cover_sources.json scripts/publish_blogger.py
+          git commit -m "Use varied finance photography for post covers" || true
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Publish new covers to Blogger
+        id: publish
+        continue-on-error: true
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          sleep 8
+          python scripts/publish_blogger.py
+
+      - name: Record cover refresh status
+        if: always()
+        env:
+          RESULT: ${{ steps.publish.outcome }}
+        run: |
+          printf 'outcome=%s\nrun_id=%s\n' "$RESULT" "$GITHUB_RUN_ID" > .cover-refresh-status
+          git pull --rebase origin main
+          git add .cover-refresh-status
+          git commit -m "Record cover refresh result" || true
+          git push origin main
+
+      - name: Fail when Blogger update failed
+        if: steps.publish.outcome != 'success'
+        run: exit 1
