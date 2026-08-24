@@ -1,0 +1,160 @@
+--- LINKLIST ---
+<b:widget id='LinkList70' locked='true' title='Css Options' type='LinkList' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='sorting'>NONE</b:widget-setting>
+          <b:widget-setting name='text-1'>recentPostsHeadline</b:widget-setting>
+          <b:widget-setting name='link-1'>true</b:widget-setting>
+          <b:widget-setting name='text-0'>fullWidth</b:widget-setting>
+          <b:widget-setting name='link-0'>true</b:widget-setting>
+        </b:widget-settings>
+--- LINKLIST ---
+<b:widget id='LinkList71' locked='true' title='Default Variables' type='LinkList' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='sorting'>NONE</b:widget-setting>
+<b:widget-setting name='text-0'>disqusShortname</b:widget-setting>
+<b:widget-setting name='link-0'></b:widget-setting>
+<b:widget-setting name='text-1'>commentsSystem</b:widget-setting>
+<b:widget-setting name='link-1'>blogger</b:widget-setting>
+<b:widget-setting name='text-2'>fixedSidebar</b:widget-setting>
+<b:widget-setting name='link-2'>true</b:widget-setting>
+<b:widget-setting name='text-3'>fixedMenu</b:widget-setting>
+<b:widget-setting name='link-3'>true</b:widget-setting>
+<b:widget-setting name='text-4'>postPerPage</b:widget-setting>
+<b:widget-setting name='link-4'>7</b:widget-setting>
+            </b:widget-settings>
+--- LINKLIST ---
+<b:widget id='LinkList72' locked='true' title='Link List' type='LinkList' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+    <b:widget-setting name='text-0'>Início</b:widget-setting>
+    <b:widget-setting name='link-0'>/</b:widget-setting>
+    <b:widget-setting name='text-1'>Sobre</b:widget-setting>
+    <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
+    <b:widget-setting name='text-2'>Contato</b:widget-setting>
+    <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>
+            </b:widget-settings>
+--- LINKLIST ---
+<b:widget id='LinkList73' locked='true' title='Top Social Widget' type='LinkList' version='2' visible='false'>
+             <b:widget-settings>
+               <b:widget-setting name='link-3'>#</b:widget-setting>
+               <b:widget-setting name='sorting'>NONE</b:widget-setting>
+               <b:widget-setting name='text-1'>x-twitter</b:widget-setting>
+               <b:widget-setting name='link-1'>https://twitter.com/LiveBlogger1</b:widget-setting>
+               <b:widget-setting name='text-0'>facebook</b:widget-setting>
+               <b:widget-setting name='link-2'>https://www.instagram.com/livebloggerofficial/</b:widget-setting>
+               <b:widget-setting name='text-3'>pinterest</b:widget-setting>
+               <b:widget-setting name='link-0'>https://www.facebook.com/templatesyard/</b:widget-setting>
+               <b:widget-setting name='text-2'>instagram</b:widget-setting>
+             </b:widget-settings>
+--- LINKLIST ---
+<b:widget id='LinkList74' locked='true' title='Link List' type='LinkList' version='2' visible='true'>
+             <b:widget-settings>
+               <b:widget-setting name='sorting'>NONE</b:widget-setting>
+               <b:widget-setting name='text-0'>Home-icon</b:widget-setting>
+               <b:widget-setting name='link-0'>/</b:widget-setting>
+               <b:widget-setting name='text-1'>Cartões</b:widget-setting>
+               <b:widget-setting name='link-1'>/search/label/Cartoes</b:widget-setting>
+               <b:widget-setting name='text-2'>Bancos</b:widget-setting>
+               <b:widget-setting name='link-2'>/search/label/Bancos</b:widget-setting>
+               <b:widget-setting name='text-3'>Investimentos</b:widget-setting>
+               <b:widget-setting name='link-3'>/search/label/Investimentos</b:widget-setting>
+               <b:widget-setting name='text-4'>Economia</b:widget-setting>
+               <b:widget-setting name='link-4'>/search/label/Economia</b:widget-setting>
+               <b:widget-setting name='text-5'>Renda Extra</b:widget-setting>
+               <b:widget-setting name='link-5'>/search/label/Renda%20Extra</b:widget-setting>
+               <b:widget-setting name='text-6'>Sobre</b:widget-setting>
+               <b:widget-setting name='link-6'>/p/sobre.html</b:widget-setting>
+            </b:widget-settings>
+--- LINKLIST ---
+<b:widget id='LinkList75' locked='true' title='Social Plugin' type='LinkList' version='2' visible='false'>
+            <b:widget-settings>
+              <b:widget-setting name='text-9'>dribbble</b:widget-setting>
+              <b:widget-setting name='link-9'>#</b:widget-setting>
+              <b:widget-setting name='text-8'>snapchat</b:widget-setting>
+              <b:widget-setting name='link-7'>#</b:widget-setting>
+              <b:widget-setting name='link-8'>#</b:widget-setting>
+              <b:widget-setting name='link-5'>#</b:widget-setting>
+              <b:widget-setting name='link-6'>https://www.youtube.com/liveblogger</b:widget-setting>
+              <b:widget-setting name='link-3'>#</b:widget-setting>
+              <b:widget-setting name='link-4'>https://www.instagram.com/livebloggerofficial/</b:widget-setting>
+              <b:widget-setting name='text-1'>x-twitter</b:widget-setting>
+              <b:widget-setting name='text-0'>facebook</b:widget-setting>
+              <b:widget-setting name='text-3'>pinterest</b:widget-setting>
+              <b:widget-setting name='text-2'>rss</b:widget-setting>
+              <b:widget-setting name='text-5'>vk</b:widget-setting>
+              <b:widget-setting name='text-4'>instagram</b:widget-setting>
+              <b:widget-setting name='text-7'>linkedin</b:widget-setting>
+              <b:widget-setting name='text-6'>youtube</b:widget-setting>
+              <b:widget-setting name='sorting'>NONE</b:widget-setting>
+              <b:widget-setting name='link-1'>https://twitter.com/LiveBlogger1</b:widget-setting>
+              <b:widget-setting name='link-2'>#</b:widget-setting>
+              <b:widget-setting name='link-0'>https://www.facebook.com/templatesyard/</b:widget-setting>
+            </b:widget-settings>
+--- LINKLIST ---
+<b:widget id='LinkList76' locked='true' title='Menu Footer Widget' type='LinkList' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='sorting'>NONE</b:widget-setting>
+          <b:widget-setting name='text-0'>Início</b:widget-setting>
+          <b:widget-setting name='link-0'>/</b:widget-setting>
+          <b:widget-setting name='text-1'>Sobre</b:widget-setting>
+          <b:widget-setting name='link-1'>/p/sobre.html</b:widget-setting>
+          <b:widget-setting name='text-2'>Contato</b:widget-setting>
+          <b:widget-setting name='link-2'>/p/contato.html</b:widget-setting>
+          <b:widget-setting name='text-3'>Privacidade</b:widget-setting>
+          <b:widget-setting name='link-3'>/p/politica-de-privacidade.html</b:widget-setting>
+          <b:widget-setting name='text-4'>Termos</b:widget-setting>
+          <b:widget-setting name='link-4'>/p/termos-de-uso.html</b:widget-setting>
+          <b:widget-setting name='text-5'>Política Editorial</b:widget-setting>
+          <b:widget-setting name='link-5'>/p/politica-editorial.html</b:widget-setting>
+          <b:widget-setting name='text-6'>Aviso Financeiro</b:widget-setting>
+          <b:widget-setting name='link-6'>/p/aviso-financeiro.html</b:widget-setting>
+            </b:widget-settings>
+--- HEADER ---
+<b:widget id='Header1' locked='true' title='Guia Do Bolso (Cabeçalho)' type='Header' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='displayUrl'>https://blogger.googleusercontent.com/img/a/AVvXsEibp5JpSL0oGvMw8cw-jqiJR7tKtd7u8O9kfPhTlEfFiH47BHPWz54KkcKHK4EOAqnZWipIjtbbl17Wxkeg6cLEsXAJS86nxYxMOmGvy3zssP-fXDAo4CjOyD3phjVLYwjpCfEQleUv253HhVLRNUN7Bqw7IwUZ7dlqKEY3t3M3ytW93bT5Dpv9tNKS7GM-=s189</b:widget-setting>
+                <b:widget-setting name='displayHeight'>47</b:widget-setting>
+                <b:widget-setting name='sectionWidth'>150</b:widget-setting>
+                <b:widget-setting name='useImage'>true</b:widget-setting>
+                <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+                <b:widget-setting name='imagePlacement'>REPLACE</b:widget-setting>
+                <b:widget-setting name='displayWidth'>189</b:widget-setting>
+              </b:widget-settings>
+        <b:include cond='data:imagePlacement in {&quot;REPLACE&quot;, &quot;BEFORE_DESCRIPTION&quot;}' name='image'/>
+        <b:include cond='data:imagePlacement == &quot;BEHIND&quot;' name='title'/>
+              <b:includable id='behindImageStyle'>
+      <b:include cond='data:this.image' data='{                    image: data:this.image,                    selector: &quot;.header-widget&quot;                  }' name='responsiveImageStyle'/>
+              <b:includable id='image'>
+      <a class='header-image-wrapper' expr:href='data:blog.homepageUrl'>
+        <img expr:alt='data:blog.title.escaped' expr:data-height='data:height' expr:data-width='data:width' expr:src='data:image'/>
+--- HEADER-TYPE ---
+<b:widget id='Header1' locked='true' title='Guia Do Bolso (Cabeçalho)' type='Header' version='2' visible='true'>
+              <b:widget-settings>
+                <b:widget-setting name='displayUrl'>https://blogger.googleusercontent.com/img/a/AVvXsEibp5JpSL0oGvMw8cw-jqiJR7tKtd7u8O9kfPhTlEfFiH47BHPWz54KkcKHK4EOAqnZWipIjtbbl17Wxkeg6cLEsXAJS86nxYxMOmGvy3zssP-fXDAo4CjOyD3phjVLYwjpCfEQleUv253HhVLRNUN7Bqw7IwUZ7dlqKEY3t3M3ytW93bT5Dpv9tNKS7GM-=s189</b:widget-setting>
+                <b:widget-setting name='displayHeight'>47</b:widget-setting>
+                <b:widget-setting name='sectionWidth'>150</b:widget-setting>
+                <b:widget-setting name='useImage'>true</b:widget-setting>
+                <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+                <b:widget-setting name='imagePlacement'>REPLACE</b:widget-setting>
+                <b:widget-setting name='displayWidth'>189</b:widget-setting>
+              </b:widget-settings>
+        <b:include cond='data:imagePlacement in {&quot;REPLACE&quot;, &quot;BEFORE_DESCRIPTION&quot;}' name='image'/>
+        <b:include cond='data:imagePlacement == &quot;BEHIND&quot;' name='title'/>
+              <b:includable id='behindImageStyle'>
+      <b:include cond='data:this.image' data='{                    image: data:this.image,                    selector: &quot;.header-widget&quot;                  }' name='responsiveImageStyle'/>
+              <b:includable id='image'>
+      <a class='header-image-wrapper' expr:href='data:blog.homepageUrl'>
+        <img expr:alt='data:blog.title.escaped' expr:data-height='data:height' expr:data-width='data:width' expr:src='data:image'/>
+--- EXTERNAL URLS / DEMO-LIKE STRINGS ---
+Name:        TopSEO
+Author:      TemplatesYard
+Author Url:  https://www.templatesyard.com/
+ .button.download:before{
+               <b:widget-setting name='link-1'>https://twitter.com/LiveBlogger1</b:widget-setting>
+               <b:widget-setting name='link-2'>https://www.instagram.com/livebloggerofficial/</b:widget-setting>
+               <b:widget-setting name='link-0'>https://www.facebook.com/templatesyard/</b:widget-setting>
+              <b:widget-setting name='link-6'>https://www.youtube.com/liveblogger</b:widget-setting>
+              <b:widget-setting name='link-4'>https://www.instagram.com/livebloggerofficial/</b:widget-setting>
+              <b:widget-setting name='link-1'>https://twitter.com/LiveBlogger1</b:widget-setting>
+              <b:widget-setting name='link-0'>https://www.facebook.com/templatesyard/</b:widget-setting>
+    <div class='copyright-area'>Crafted with <i aria-hidden='true' class='fa fa-heart' style='color: red;margin:0 2px;'/> by <a href='http://www.templatesyard.com/' id='mycontent' rel='dofollow' title='TemplatesYard'>Blogspot</a> | Distributed by <a href='https://gooyaabitemplates.com/' rel='dofollow' style='color: #0be6af;' target='_blank' title='Theme'>Theme</a>
