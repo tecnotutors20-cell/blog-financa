@@ -18,30 +18,41 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Find remaining demo strings
+      - name: Inspect theme structure
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
 
-          p = Path('theme-7997621208047243353.xml')
-          lines = p.read_text(encoding='utf-8').splitlines()
-          terms = ['TopSEO','Sitemap','Error Page','Documentation','Mega Menu','Download This Theme','Download this theme','Download Theme','About Us']
+          text = Path('theme-7997621208047243353.xml').read_text(encoding='utf-8')
           out=[]
-          for i,line in enumerate(lines):
-              if any(t.casefold() in line.casefold() for t in terms):
-                  a=max(0,i-4); b=min(len(lines),i+5)
-                  out.append(f'--- match line {i+1} ---')
-                  for j in range(a,b):
-                      out.append(f'{j+1}: {lines[j]}')
+
+          for pat,label in [
+              (r"<b:widget id='LinkList\d+'.*?</b:widget>", 'LINKLIST'),
+              (r"<b:widget id='Header\d+'.*?</b:widget>", 'HEADER'),
+              (r"<b:widget[^>]+type='Header'.*?</b:widget>", 'HEADER-TYPE'),
+          ]:
+              for m in re.finditer(pat,text,re.DOTALL|re.I):
+                  block=m.group(0)
+                  # Keep only settings/opening lines, enough to identify labels/links/images.
+                  lines=[ln for ln in block.splitlines() if 'widget-setting' in ln or '<b:widget ' in ln or '<img' in ln or 'logo' in ln.lower() or 'image' in ln.lower()]
+                  out.append(f'--- {label} ---')
+                  out.extend(lines[:120])
+
+          out.append('--- EXTERNAL URLS / DEMO-LIKE STRINGS ---')
+          for line in text.splitlines():
+              low=line.casefold()
+              if any(k in low for k in ['templatesyard','topseo','documentation','sitemap','error page','mega menu','download','liveblogger']):
+                  out.append(line)
+
           Path('debug').mkdir(exist_ok=True)
-          Path('debug/theme-matches.txt').write_text('\n'.join(out) or 'NO MATCHES',encoding='utf-8')
+          Path('debug/theme-structure.txt').write_text('\n'.join(out),encoding='utf-8')
           PY
 
       - name: Commit inspection output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add debug/theme-matches.txt
-          git commit -m "Record remaining demo theme matches" || exit 0
+          git add debug/theme-structure.txt
+          git commit -m "Record header and menu structure" || exit 0
           git push origin main
