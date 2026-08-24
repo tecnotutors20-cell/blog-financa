@@ -1,0 +1,60 @@
+name: Publish afternoon SEO article
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-automation-20260824-1400.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add article and cover mapping
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('content/blogger_posts.json')
+          src=Path('content/automation/2026-08-24-1400.json')
+          posts=json.loads(path.read_text(encoding='utf-8'))
+          post=json.loads(src.read_text(encoding='utf-8'))
+          post.pop('cluster',None)
+          if not any(x.get('title','').casefold()==post['title'].casefold() for x in posts):
+              posts.append(post)
+              path.write_text(json.dumps(posts,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          pub=Path('scripts/publish_blogger.py')
+          s=pub.read_text(encoding='utf-8')
+          title='compra feita no dia do fechamento do cartão cai em qual fatura?'
+          morning='fechamento da fatura do cartão: como funciona e qual é o melhor dia para comprar?'
+          marker='    "pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas": f"{COVER_BASE}/pix-seguranca.jpg",\n'
+          additions=(
+              '    "'+morning+'": f"{COVER_BASE}/cartao-credito.jpg",\n'
+              '    "'+title+'": f"{COVER_BASE}/cartao-credito.jpg",\n'
+          )
+          if title not in s:
+              s=s.replace(marker,marker+additions)
+              pub.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit article
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/blogger_posts.json scripts/publish_blogger.py
+          git commit -m "Add card closing-day long-tail and cover mappings" || true
+          git pull --rebase origin main
+          git push origin main
+      - name: Publish to Blogger
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python scripts/publish_blogger.py
