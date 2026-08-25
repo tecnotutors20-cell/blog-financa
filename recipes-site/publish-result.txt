@@ -1,0 +1,4 @@
+outcome=success
+blog_id=6682336557114829830
+posts_updated=45
+pages_target=7
