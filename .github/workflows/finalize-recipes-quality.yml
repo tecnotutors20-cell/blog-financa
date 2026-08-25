@@ -1,0 +1,182 @@
+name: Finalize recipe content quality
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/finalize-recipes-quality.yml
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install beautifulsoup4 pillow
+      - name: Fix covers, duplicate title and health-style title
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          python - <<'PY'
+          import html,json,os,re,time,urllib.parse,urllib.request
+          from io import BytesIO
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          from PIL import Image,ImageOps
+
+          BLOG_ID='6682336557114829830'
+          API='https://www.googleapis.com/blogger/v3'
+          ROOT=Path('recipes-site/assets/covers'); ROOT.mkdir(parents=True,exist_ok=True)
+          RAW='https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/recipes-site/assets/covers'
+          UA={'User-Agent':'Mozilla/5.0 (compatible; ReceitasParaPequenos/1.0)'}
+
+          token_req=urllib.request.Request('https://oauth2.googleapis.com/token',data=urllib.parse.urlencode({'client_id':os.environ['GOOGLE_CLIENT_ID'],'client_secret':os.environ['GOOGLE_CLIENT_SECRET'],'refresh_token':os.environ['GOOGLE_REFRESH_TOKEN'],'grant_type':'refresh_token'}).encode(),method='POST')
+          token_req.add_header('Content-Type','application/x-www-form-urlencoded')
+          with urllib.request.urlopen(token_req,timeout=30) as r: token=json.load(r)['access_token']
+          def api(method,path,params=None,body=None):
+            url=API+path
+            if params:url+='?'+urllib.parse.urlencode(params)
+            data=None if body is None else json.dumps(body,ensure_ascii=False).encode()
+            req=urllib.request.Request(url,data=data,method=method,headers={'Authorization':f'Bearer {token}','Accept':'application/json'})
+            if body is not None:req.add_header('Content-Type','application/json; charset=utf-8')
+            for attempt in range(6):
+              try:
+                with urllib.request.urlopen(req,timeout=45) as r: out=json.load(r) if r.length != 0 else {}
+                if method!='GET':time.sleep(3.2)
+                return out
+              except Exception:
+                if attempt==5:raise
+                time.sleep(min(5*(2**attempt),45))
+          def all_posts():
+            out=[];pt=None
+            while True:
+              p={'maxResults':500,'fetchBodies':True,'status':'LIVE','view':'ADMIN'}
+              if pt:p['pageToken']=pt
+              d=api('GET',f'/blogs/{BLOG_ID}/posts',p);out+=d.get('items',[]);pt=d.get('nextPageToken')
+              if not pt:return out
+
+          sources={
+            'Almôndegas de Carne Moída com Legumes para Bebês':('almondegas-legumes.jpg','https://www.pexels.com/photo/mixed-vegetables-served-on-brown-bowl-998245/'),
+            'Panqueca de Maçã e Canela para Bebês':('panqueca-maca-canela.jpg','https://www.pexels.com/photo/pancakes-on-the-plate-7111383/'),
+            'Sopa de Ervilha com Batata para Bebês':('sopa-ervilha-batata.jpg','https://www.pexels.com/photo/close-up-shot-of-pea-soup-8738014/'),
+            'Sopa Creme de Abóbora com Lentilha para Bebês':('sopa-abobora-lentilha.jpg','https://www.pexels.com/photo/soup-in-bowl-14822890/'),
+            'Arroz Doce Sem Açúcar para Bebês':('arroz-doce.jpg','https://www.pexels.com/photo/food-healthy-meal-breakfast-116725/'),
+            'Iogurte Natural com Manga para Bebês':('iogurte-manga.jpg','https://www.pexels.com/photo/yogurt-with-mango-next-to-orchid-10645412/'),
+            'Pão de Banana Sem Açúcar para Bebês':('pao-banana.jpg','https://www.pexels.com/photo/close-up-of-a-simple-loaf-cake-6803031/'),
+            'Hambúrguer Caseiro de Lentilha para Bebês':('hamburguer-lentilha.jpg','https://www.pexels.com/photo/delicious-vegan-lentil-koftes-with-fresh-herbs-29838544/'),
+            'Papinha de Frutas Amassadas para Bebês (sem cozinhar)':('papinha-frutas.jpg','https://www.pexels.com/photo/apple-banana-fruits-health-3679/'),
+            'Omelete de Espinafre para Bebês':('omelete-espinafre.jpg','https://www.pexels.com/photo/spinach-omelette-on-white-ceramic-plate-10756661/'),
+            'Sopa Cremosa de Ervilha para Bebês':('sopa-cremosa-ervilha.jpg','https://www.pexels.com/photo/soup-on-plate-16444407/'),
+            'Bolinho de Brócolis Assado para Bebês (método BLW)':('bolinho-brocolis.jpg','https://www.pexels.com/photo/homemade-dinner-on-a-plate-18976852/'),
+            'Purê de Abóbora com Frango para Bebês (a partir dos 6 meses)':('pure-abobora-frango.jpg','https://www.pexels.com/photo/a-bowl-of-pumpkin-soup-6853444/'),
+            'Panqueca de Banana com Aveia para Bebês':('panqueca-banana-aveia.jpg','https://www.pexels.com/photo/photo-of-pancakes-with-banana-on-white-ceramic-plate-4725660/'),
+          }
+          gnocchi_sources={
+            'nhoque-de-batata-doce-para-bebes_0330805852.html':('nhoque-espinafre.jpg','https://www.pexels.com/photo/a-gnocchi-on-a-ceramic-plate-6659662/'),
+            'nhoque-de-batata-doce-para-bebes.html':('nhoque-batata-doce.jpg','https://www.pexels.com/photo/gnocchi-dish-in-close-up-shot-6659625/'),
+          }
+
+          def pexels_download(page, filename):
+            req=urllib.request.Request(page,headers=UA)
+            with urllib.request.urlopen(req,timeout=60) as r: page_html=r.read().decode('utf-8','replace')
+            m=re.search(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)',page_html,re.I)
+            if not m:
+              m=re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',page_html,re.I)
+            if not m:raise RuntimeError('og:image não encontrado: '+page)
+            image_url=html.unescape(m.group(1))
+            req=urllib.request.Request(image_url,headers=UA)
+            with urllib.request.urlopen(req,timeout=60) as r: data=r.read()
+            im=Image.open(BytesIO(data));im=ImageOps.exif_transpose(im).convert('RGB')
+            im=ImageOps.fit(im,(1200,630),method=Image.Resampling.LANCZOS,centering=(.5,.5))
+            im.save(ROOT/filename,'JPEG',quality=88,optimize=True,progressive=True)
+            return image_url
+
+          provenance={}
+          for title,(fn,page) in sources.items():
+            pexels_download(page,fn);provenance[fn]=page
+          for key,(fn,page) in gnocchi_sources.items():
+            pexels_download(page,fn);provenance[fn]=page
+
+          def author_box():
+            return "<div class='recipe-author-box' style='background:#f5f7f5;border-left:4px solid #5b7f60;margin:18px 0;padding:12px 14px'><strong>Por <a href='/p/equipe-editorial.html'>Equipe Editorial do Receitas Para Pequenos</a></strong><br/><span>Conteúdo educativo, revisado com foco em clareza, preparo e segurança alimentar.</span></div>"
+          def safety_box():
+            return "<div class='recipe-safety-note' style='background:#fff8e8;border:1px solid #ecd9a2;border-radius:8px;margin:18px 0;padding:12px 14px'><strong>Atenção:</strong> adapte a textura e o formato às habilidades da criança, ofereça sempre com supervisão e considere alergias e restrições individuais. Em caso de dificuldade de mastigação/deglutição ou necessidade clínica, procure profissional habilitado.</div>"
+          def schema(title,url,image,ingredients,instructions,published):
+            d={'@context':'https://schema.org','@type':'Recipe','name':title,'author':{'@type':'Organization','name':'Equipe Editorial do Receitas Para Pequenos'},'datePublished':published[:10] if published else None,'dateModified':'2026-08-24','mainEntityOfPage':url,'image':[image] if image else None,'recipeIngredient':ingredients,'recipeInstructions':[{'@type':'HowToStep','text':x} for x in instructions]}
+            return "<script type='application/ld+json'>"+json.dumps({k:v for k,v in d.items() if v},ensure_ascii=False)+"</script>"
+
+          posts=all_posts(); updates=0
+          for post in posts:
+            title=post.get('title','');url=post.get('url','');path=urllib.parse.urlparse(url).path.rsplit('/',1)[-1];content=post.get('content','')
+            rewrite=None; new_title=title; cover=None
+            if path=='nhoque-de-batata-doce-para-bebes_0330805852.html':
+              new_title='Nhoque de Batata-Doce com Espinafre para Bebês'
+              fn,page=gnocchi_sources[path];cover=f'{RAW}/{fn}'
+              ingredients=['1 xícara de batata-doce cozida e bem amassada','2 colheres (sopa) de espinafre cozido, espremido e bem picado','Farinha de aveia aos poucos, apenas até dar ponto de modelar']
+              steps=['Misture a batata-doce e o espinafre até ficar uniforme.','Acrescente farinha de aveia aos poucos, somente até a massa ficar modelável e macia.','Faça rolinhos finos, corte em pedaços pequenos e cozinhe em água fervente.','Retire quando os nhoques subirem à superfície e deixe amornar antes de servir.']
+              rewrite=(ingredients,steps,"<p>Esta versão combina batata-doce e espinafre em um nhoque macio, diferente da outra receita de nhoque já publicada no site. A quantidade de farinha pode variar conforme a umidade da batata.</p><h2>Ingredientes</h2><ul>"+''.join(f'<li>{x}</li>' for x in ingredients)+"</ul><h2>Modo de preparo</h2><ol>"+''.join(f'<li>{x}</li>' for x in steps)+"</ol><h2>Textura e como servir</h2><p>O nhoque deve ficar macio a ponto de ser facilmente amassado com o garfo. Ajuste tamanho, textura e forma de oferecer às habilidades da criança. Evite deixar a massa dura adicionando farinha em excesso.</p><h2>Perguntas frequentes</h2><h3>Posso congelar?</h3><p>Você pode congelar os nhoques modelados em uma assadeira e, depois de firmes, transferir para recipiente próprio. Cozinhe diretamente do congelador e confirme que o centro ficou completamente aquecido.</p><h3>Precisa colocar sal?</h3><p>Não é necessário adicionar sal para que a receita tenha sabor; a batata-doce e o espinafre já contribuem com sabor próprio.</p>")
+            elif 'Danoninho da Imunidade' in title:
+              new_title='Creminho de Banana e Cenoura para Bebês — Sem Açúcar'
+              soup=BeautifulSoup(content,'html.parser');img=soup.find('img');cover=img.get('src') if img else None
+              ingredients=['1 banana madura','2 colheres (sopa) de cenoura cozida e bem macia','Água filtrada em pequena quantidade, somente se precisar ajustar a textura']
+              steps=['Amasse ou bata a banana com a cenoura cozida.','Se necessário, acrescente pouca água até atingir a textura adequada.','Sirva na hora ou mantenha refrigerado por curto período em recipiente limpo e fechado.']
+              rewrite=(ingredients,steps,"<p>Este creminho de banana e cenoura é uma preparação simples, sem adição de açúcar e sem promessas de benefício médico. A alimentação deve ser variada e adaptada às necessidades de cada criança.</p><h2>Ingredientes</h2><ul>"+''.join(f'<li>{x}</li>' for x in ingredients)+"</ul><h2>Modo de preparo</h2><ol>"+''.join(f'<li>{x}</li>' for x in steps)+"</ol><h2>Textura</h2><p>Para uma textura mais rústica, amasse com garfo. Para uma textura mais homogênea, processe rapidamente. A escolha deve acompanhar as habilidades da criança e a orientação profissional quando houver necessidade específica.</p><h2>Posso adoçar?</h2><p>A banana madura já fornece sabor naturalmente doce, então a receita não precisa de açúcar adicionado.</p>")
+            elif title in sources:
+              fn,page=sources[title];cover=f'{RAW}/{fn}'
+            elif title=='Nhoque de Batata-Doce para Bebês' and path in gnocchi_sources:
+              fn,page=gnocchi_sources[path];cover=f'{RAW}/{fn}'
+
+            if not (rewrite or cover):continue
+            if rewrite:
+              ingredients,steps,core=rewrite
+              body=author_box()+safety_box()+f"<div class='separator' style='clear:both;margin:0 0 22px;text-align:center'><img alt='{html.escape(new_title,quote=True)}' src='{cover}' style='border-radius:12px;height:auto;max-width:100%;width:1200px'/></div>"+core+"<h2>Referência geral</h2><p>Para orientações públicas sobre alimentação infantil, consulte o <a href='https://www.gov.br/saude/pt-br/assuntos/saude-brasil/eu-quero-me-alimentar-melhor' rel='nofollow noopener' target='_blank'>Ministério da Saúde</a>.</p>"+schema(new_title,url,cover,ingredients,steps,post.get('published',''))
+            else:
+              soup=BeautifulSoup(content,'html.parser')
+              for img in soup.find_all('img'):
+                src=img.get('src','')
+                if 'bing.com' in src or 'bing.net' in src:img.decompose()
+              # remove old generated cover if it points at another cover repository URL
+              for img in soup.find_all('img'):
+                if 'recipes-site/assets/covers' in img.get('src',''):img.decompose()
+              div=soup.new_tag('div');div['class']='separator';div['style']='clear:both;margin:0 0 22px;text-align:center'
+              im=soup.new_tag('img');im['src']=cover;im['alt']=new_title;im['style']='border-radius:12px;height:auto;max-width:100%;width:1200px';div.append(im)
+              # insert after author/safety boxes when possible, otherwise at start
+              target=soup.find(class_='recipe-safety-note') or soup.find(class_='recipe-author-box')
+              if target:target.insert_after(div)
+              else:soup.insert(0,div)
+              for sc in soup.find_all('script',attrs={'type':'application/ld+json'}):
+                try:
+                  data=json.loads(sc.string or '{}')
+                  if data.get('@type')=='Recipe':
+                    data['image']=[cover];data['name']=new_title;sc.string=json.dumps(data,ensure_ascii=False)
+                except Exception:pass
+              body=str(soup)
+            api('PATCH',f"/blogs/{BLOG_ID}/posts/{post['id']}",{'publish':'true','fetchBody':'false'},{'title':new_title,'content':body,'labels':post.get('labels',[])})
+            post['title']=new_title;post['content']=body;updates+=1
+
+          # Refresh permanent snapshot after all patches.
+          refreshed=all_posts()
+          snap=[{k:x.get(k) for k in ['id','title','url','published','updated','labels','content']} for x in refreshed]
+          Path('recipes-site/current_posts.json').write_text(json.dumps(snap,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          Path('recipes-site/cover_sources.json').write_text(json.dumps(provenance,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          Path('recipes-site/final-quality-result.txt').write_text(f'outcome=success\nposts_patched={updates}\nlicensed_covers={len(provenance)}\n',encoding='utf-8')
+          PY
+      - name: Commit covers and refreshed snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recipes-site/assets/covers recipes-site/current_posts.json recipes-site/cover_sources.json recipes-site/final-quality-result.txt
+          git commit -m "Fix recipe covers and duplicate content quality" || true
+          git pull --rebase origin main
+          git push origin main
