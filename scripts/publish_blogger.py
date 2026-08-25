@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "med do pix: como pedir devolução após golpe e qual é o prazo?": f"{COVER_BASE}/pix-seguranca.jpg",
     "pagar a fatura antes do fechamento libera limite? entenda como funciona": "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real/pagar-fatura-antes-fechamento.svg",
     "como organizar a vida financeira do zero: um plano em 7 etapas": f"{COVER_BASE}/organizar-vida-financeira.jpg",
     "reserva de emergência: como calcular, montar e onde guardar": f"{COVER_BASE}/reserva-emergencia.jpg",
