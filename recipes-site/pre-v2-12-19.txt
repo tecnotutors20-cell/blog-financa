@@ -1,0 +1,8 @@
+outcome=failed
+start=12
+end=19
+generated=5
+failures=3
+failure=4386402784459926668|Risoto Cremoso de Abobrinha para Bebês|HTTP Error 429: Too Many Requests
+failure=3854147161351079039|Purê de Manga com Aveia para Bebês|HTTP Error 429: Too Many Requests
+failure=6925846125967362523|Arroz Doce Sem Açúcar para Bebês|HTTP Error 429: Too Many Requests
