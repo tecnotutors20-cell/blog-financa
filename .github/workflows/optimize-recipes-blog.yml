@@ -1,0 +1,138 @@
+name: Optimize Receitas Para Pequenos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/optimize-recipes-blog.yml
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install beautifulsoup4
+
+      - name: Restore recipes publisher
+        run: |
+          python - <<'PY'
+          import base64, gzip
+          from pathlib import Path
+          src=Path('recipes-site/setup_recipes_blog.py.gz.b64').read_text(encoding='utf-8').strip()
+          Path('recipes-site/setup_recipes_blog.py').write_bytes(gzip.decompress(base64.b64decode(src)))
+          PY
+          python -m py_compile recipes-site/setup_recipes_blog.py
+
+      - name: Build cleaned recipe theme
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import xml.etree.ElementTree as ET
+
+          source=Path('theme-7997621208047243353.xml')
+          target=Path('recipes-site/theme-receitas-para-pequenos.xml')
+          text=source.read_text(encoding='utf-8')
+          text=text.replace('Guia Do Bolso','Receitas Para Pequenos')
+          text=text.replace('/p/aviso-financeiro.html','/p/aviso-sobre-alimentacao-e-saude.html')
+          text=text.replace('Aviso Financeiro','Aviso sobre Alimentação e Saúde')
+          text=text.replace(
+              'Aviso: Este conteúdo tem caráter educativo e informativo e não constitui recomendação individual de investimento, crédito ou contratação de produto financeiro. Compare custos, riscos e condições e consulte profissionais habilitados quando necessário.',
+              'Aviso: Este conteúdo tem caráter educativo e não substitui orientação individual de pediatra, nutricionista ou outro profissional habilitado. Adapte textura e forma de servir às habilidades da criança e considere alergias e restrições individuais.'
+          )
+
+          # Main menu: clean recipe clusters only.
+          pat=re.compile(r"(<b:widget id='LinkList74'.*?<b:widget-settings>)(.*?)(</b:widget-settings>)",re.DOTALL)
+          m=pat.search(text)
+          if not m: raise RuntimeError('LinkList74 não encontrado')
+          settings="""
+               <b:widget-setting name='sorting'>NONE</b:widget-setting>
+               <b:widget-setting name='text-0'>Home-icon</b:widget-setting>
+               <b:widget-setting name='link-0'>/</b:widget-setting>
+               <b:widget-setting name='text-1'>Papinhas e Purês</b:widget-setting>
+               <b:widget-setting name='link-1'>/search/label/Papinhas%20e%20Pur%C3%AAs</b:widget-setting>
+               <b:widget-setting name='text-2'>Lanches e BLW</b:widget-setting>
+               <b:widget-setting name='link-2'>/search/label/Lanches%20e%20BLW</b:widget-setting>
+               <b:widget-setting name='text-3'>Refeições</b:widget-setting>
+               <b:widget-setting name='link-3'>/search/label/Refei%C3%A7%C3%B5es</b:widget-setting>
+               <b:widget-setting name='text-4'>Sem Açúcar</b:widget-setting>
+               <b:widget-setting name='link-4'>/search/label/Sem%20A%C3%A7%C3%BAcar</b:widget-setting>
+               <b:widget-setting name='text-5'>Receitas para Bebês</b:widget-setting>
+               <b:widget-setting name='link-5'>/search/label/Receitas%20para%20Beb%C3%AAs</b:widget-setting>
+          """
+          text=text[:m.start()]+m.group(1)+settings+m.group(3)+text[m.end():]
+
+          # Desktop header becomes a clean text brand, independent of old TopSEO art.
+          hp=re.compile(r"(<b:widget id='Header1'.*?</b:widget>)",re.DOTALL)
+          hm=hp.search(text)
+          if not hm: raise RuntimeError('Header1 não encontrado')
+          block=hm.group(1)
+          block=re.sub(r"<b:includable id='main' var='this'>.*?</b:includable>","<b:includable id='main' var='this'><div class='header-widget'><h1 class='recipe-site-logo'><a expr:href='data:blog.homepageUrl'>Receitas Para Pequenos</a></h1></div></b:includable>",block,count=1,flags=re.DOTALL)
+          block=re.sub(r"(<b:widget-setting name='useImage'>).*?(</b:widget-setting>)",r"\g<1>false\2",block,count=1)
+          text=text[:hm.start()]+block+text[hm.end():]
+
+          # Mobile logo becomes text too.
+          mp=re.compile(r"(<b:widget id='Image70'.*?</b:widget>)",re.DOTALL)
+          mm=mp.search(text)
+          if mm:
+              block=mm.group(1)
+              block=re.sub(r"<b:includable id='content'>.*?</b:includable>","<b:includable id='content'><div class='logo-content'><h3 class='recipe-mobile-logo'><a expr:href='data:blog.homepageUrl'>Receitas Para Pequenos</a></h3></div></b:includable>",block,count=1,flags=re.DOTALL)
+              text=text[:mm.start()]+block+text[mm.end():]
+
+          css="""<style type='text/css'>
+          .recipe-site-logo,.recipe-mobile-logo{margin:0;font-family:Arial,sans-serif;font-weight:800;letter-spacing:-.7px;line-height:1.05}
+          .recipe-site-logo{font-size:31px}.recipe-mobile-logo{font-size:20px}
+          .recipe-site-logo a,.recipe-mobile-logo a{color:#29402d;text-decoration:none}
+          @media(max-width:700px){.recipe-site-logo{font-size:24px}}
+          </style>
+          """
+          text=text.replace('</head>',css+'</head>',1)
+
+          # Validate while tolerating Blogger legacy namespace prefixes.
+          declared=set(re.findall(r"xmlns:([A-Za-z_][\w.-]*)=",text))
+          ep=set(re.findall(r"</?([A-Za-z_][\w.-]*):[A-Za-z_]",text))
+          ap=set(re.findall(r"\s([A-Za-z_][\w.-]*):[A-Za-z_][\w.-]*\s*=",text))
+          missing=sorted((ep|ap)-declared-{'xml','xmlns'})
+          check=text
+          if missing:
+              attrs=''.join(f" xmlns:{p}='urn:blogger-legacy:{p}'" for p in missing)
+              check=check.replace('<html ','<html'+attrs+' ',1)
+          ET.fromstring(check)
+          target.parent.mkdir(exist_ok=True)
+          target.write_text(text,encoding='utf-8')
+          PY
+
+      - name: Publish institutional pages and optimize all existing recipes
+        id: publish
+        continue-on-error: true
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python recipes-site/setup_recipes_blog.py
+
+      - name: Commit permanent recipe infrastructure and result
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add recipes-site/setup_recipes_blog.py recipes-site/theme-receitas-para-pequenos.xml recipes-site/publish-result.txt
+          git commit -m "Optimize Receitas Para Pequenos for SEO and AdSense" || true
+          git push origin main
+
+      - name: Fail if Blogger publication failed
+        if: steps.publish.outcome != 'success'
+        run: exit 1
