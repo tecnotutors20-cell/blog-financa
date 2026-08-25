@@ -1,0 +1,10 @@
+outcome=failed
+start=20
+end=32
+generated=8
+failures=5
+failure=7455163115938467054|Bolinho de Brócolis Assado para Bebês (método BLW)|HTTP Error 429: Too Many Requests
+failure=6210490324212826340|Nhoque de Batata-Doce para Bebês|HTTP Error 429: Too Many Requests
+failure=2266833717767489482|Hambúrguer Caseiro de Lentilha para Bebês|HTTP Error 429: Too Many Requests
+failure=8908547051395980329|Papinha de Frutas Amassadas para Bebês (sem cozinhar)|HTTP Error 429: Too Many Requests
+failure=7960969834434699318|Omelete de Espinafre para Bebês|HTTP Error 429: Too Many Requests
