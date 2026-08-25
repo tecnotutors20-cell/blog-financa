@@ -1,0 +1,48 @@
+name: Publish Pix SEO pillar
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-automation-20260825-0900.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add article to content database
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('content/blogger_posts.json')
+          src=Path('content/automation/2026-08-25-0900.json')
+          posts=json.loads(path.read_text(encoding='utf-8'))
+          post=json.loads(src.read_text(encoding='utf-8'))
+          post.pop('cluster',None)
+          if not any(x.get('title','').casefold()==post['title'].casefold() for x in posts):
+              posts.append(post)
+              path.write_text(json.dumps(posts,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit article
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/blogger_posts.json
+          git commit -m "Publish Pix recovery SEO pillar" || true
+          git pull --rebase origin main
+          git push origin main
+      - name: Publish to Blogger
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python scripts/publish_blogger.py
