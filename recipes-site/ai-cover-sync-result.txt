@@ -1,7 +1,5 @@
 outcome=success
-phase=synced
-posts=46
-generated=0
-updated=46
-already_ok=0
-failures=0
+phase=generated
+posts=47
+generated=1
+already_generated=46
