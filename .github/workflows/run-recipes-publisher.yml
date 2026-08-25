@@ -1,0 +1,52 @@
+name: Run recipes Blogger publisher
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/run-recipes-publisher.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install beautifulsoup4
+      - name: Restore publisher
+        run: |
+          python - <<'PY'
+          import base64,gzip
+          from pathlib import Path
+          s=Path('recipes-site/setup_recipes_blog.py.gz.b64').read_text().strip()
+          Path('recipes-site/setup_recipes_blog.py').write_bytes(gzip.decompress(base64.b64decode(s)))
+          PY
+          python -m py_compile recipes-site/setup_recipes_blog.py
+      - name: Publish
+        id: publish
+        continue-on-error: true
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python recipes-site/setup_recipes_blog.py
+      - name: Record
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add recipes-site/setup_recipes_blog.py recipes-site/publish-result.txt
+          git commit -m "Publish optimized Receitas Para Pequenos content" || true
+          git push origin main
+      - name: Fail if needed
+        if: steps.publish.outcome != 'success'
+        run: exit 1
