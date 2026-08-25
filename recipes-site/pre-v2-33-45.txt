@@ -1,0 +1,10 @@
+outcome=failed
+start=33
+end=45
+generated=8
+failures=5
+failure=6109033704081564588|🍌🥕 Danoninho da Imunidade para Bebês — Saudável, Nutritivo e Prático!|HTTP Error 429: Too Many Requests
+failure=4143374069931407486|🍗 Strogonoff Saudável de Frango para Bebês — Cremoso, Nutritivo e Delicioso!|HTTP Error 429: Too Many Requests
+failure=8274275396897033338|🌽 Bolo de Milho para Bebês — Saudável, Macio e Sem Açúcar!|HTTP Error 429: Too Many Requests
+failure=5279448040476452282|🍎 Bolo de Maçã para Bebês — Saudável, Macio e Nutritivo!|HTTP Error 429: Too Many Requests
+failure=8501849809012025165|🥔🍗 Creminho de Batata com Frango para Bebês — Saudável, Nutritivo e Prático!|HTTP Error 429: Too Many Requests
