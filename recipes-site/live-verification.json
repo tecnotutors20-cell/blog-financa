@@ -1,0 +1,839 @@
+{
+  "posts": 45,
+  "pages": 7,
+  "page_titles": [
+    "Equipe Editorial",
+    "Aviso sobre Alimentação e Saúde",
+    "Política Editorial",
+    "Termos de Uso",
+    "Sobre",
+    "Contato",
+    "Política de Privacidade"
+  ],
+  "duplicate_titles": [
+    [
+      {
+        "id": "3431655994444012113",
+        "title": "Nhoque de Batata-Doce para Bebês",
+        "url": "https://www.receitasparapequenos.site/2026/07/nhoque-de-batata-doce-para-bebes_0330805852.html"
+      },
+      {
+        "id": "6210490324212826340",
+        "title": "Nhoque de Batata-Doce para Bebês",
+        "url": "https://www.receitasparapequenos.site/2026/07/nhoque-de-batata-doce-para-bebes.html"
+      }
+    ]
+  ],
+  "missing_author": [],
+  "missing_recipe_schema": [],
+  "missing_image": [
+    "Almôndegas de Carne Moída com Legumes para Bebês",
+    "Panqueca de Maçã e Canela para Bebês",
+    "Sopa de Ervilha com Batata para Bebês",
+    "Sopa Creme de Abóbora com Lentilha para Bebês"
+  ],
+  "bing_hotlinks": [
+    "Arroz Doce Sem Açúcar para Bebês",
+    "Iogurte Natural com Manga para Bebês",
+    "Pão de Banana Sem Açúcar para Bebês",
+    "Hambúrguer Caseiro de Lentilha para Bebês",
+    "Papinha de Frutas Amassadas para Bebês (sem cozinhar)",
+    "Omelete de Espinafre para Bebês",
+    "Nhoque de Batata-Doce para Bebês",
+    "Sopa Cremosa de Ervilha para Bebês",
+    "Bolinho de Brócolis Assado para Bebês (método BLW)",
+    "Purê de Abóbora com Frango para Bebês (a partir dos 6 meses)",
+    "Panqueca de Banana com Aveia para Bebês"
+  ],
+  "medicalish_titles": [
+    "🍌🥕 Danoninho da Imunidade para Bebês — Saudável, Nutritivo e Prático!"
+  ],
+  "details": [
+    {
+      "id": "3636520046898973368",
+      "title": "Almôndegas de Carne Moída com Legumes para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/08/almondegas-de-carne-moida-com-legumes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [],
+      "has_image": false,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "3407586959941022900",
+      "title": "Panqueca de Maçã e Canela para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/08/panqueca-de-maca-e-canela-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [],
+      "has_image": false,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "931772478663999947",
+      "title": "Sopa de Ervilha com Batata para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/08/sopa-de-ervilha-com-batata-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [],
+      "has_image": false,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "5738587773499458376",
+      "title": "Bolinho de Arroz e Espinafre para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/bolinho-de-arroz-e-espinafre-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh25-pLF0-z-R9K36zDptsxEidb61fMdbVFW8Ae7fOZdGLE1DhyphenhyphenlDcBnSemCd4qp2b3Sre1MhVOiIvuKj97KS5Lz7yITD5dBYyqP3zYwLAwp7BAyWucaW4CbESLHUeSy9EM1-aIJo50zWlR4YCvoyU0bS2wZwCQ2OI531OLVL2J7e1irWOk4DTq6P8ER1A/s320/IMG_0323.png"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "4457216606616163575",
+      "title": "Escondidinho de Frango com Mandioquinha para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/escondidinho-de-frango-com-mandioquinha.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3Gf0D-ZhlCRdqzb3wP3E0mJJHVVJ28el02-_xZbs7fmOAcShRZRV7NJJET1v67rD41bCw3XrZRRhsUwidmWfl5szffCr8PRbcvNetwHx0GNjhjqAgUUgwQ6ZLXqkb3nbNx7jCqhXzQmvlWZohRaC381Lagz-0IrCG3TVI7ckg0gfCHr3wNjS7PdecS3c/s320/IMG_0322.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "8055893661095551516",
+      "title": "Purê de Feijão com Abóbora para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/pure-de-feijao-com-abobora-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi9js2zy_dvWgbnKTcwn6e4Ij5An14GXBZl98FwNmuVCe32cOCzzjejM54usx6XMh4jrIJHII3lHZHrWDee-9GHEfO91g4ehRPogKezGfttTwwq-Xx4CEwlhEZHuyyzXqypHAUz5AAe6vSDdZlk3Z4cyrsNCHXAcGSqXQ5k-dsmSEOstHbldkP1l3w-cPA/s320/IMG_0321.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "9036799991773498828",
+      "title": "Creme de Milho com Frango Desfiado para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/creme-de-milho-com-frango-desfiado-para.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-yLtH95ur2BgA07qi_LFl9ftGPnY-sF8wXiQEA2bwSumGlKYqeq7SMv2XCmeOut3FBfu-rfZmxNXL6VzG7XjOeEHYU4sXSTc_N2XaprfhF1pcUnpuKTXGnCNNEq2FLy1fU5co64hK4syAhDAT5tQqCOcCKPZadxs93HwGrEyjWKybh-mSTK4E0gyQPOg/w320-h320/IMG_0313.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "752413986360532387",
+      "title": "Omelete de Abobrinha e Queijo para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/omelete-de-abobrinha-e-queijo-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOimulFrQf66nDpzDrGAA6E-rq3ub5WInwRxOjrrffB03bg573wpnbKP8_r3QN8-06hgILyxJklC8gMr70FoX3jhy9zuGN_FE2HR7726Zc9YIGjXx5T6Ti4RtvI4DR9zsOh9pdonKZPQyOmrosa4UpZWOlDXayJWTC__NXHfDzUiA_s-GqBQoUclcYcPI/s320/IMG_0312.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "3431655994444012113",
+      "title": "Nhoque de Batata-Doce para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/nhoque-de-batata-doce-para-bebes_0330805852.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgX5ZDZCxXVkfy-DdGOYpsJZBRsgxgF9UXJxTnbLfwcYXYG_j0fm-gTKpZZEEqODEOLqXmDZLXVoyl5EfX0wjhgs1UR4ND6QM2lYTGwzj-_4SFpxvbt2Kw0WqzISrz9O0nXTnD8OuMDcgt8avzko1EudwcXFcTbT-zMYODtVNWMGjxkyDi42HP3ZTeWK1E/w320-h214/IMG_0311.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "2631454301942326151",
+      "title": "Torta Salgada de Legumes para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/torta-salgada-de-legumes-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEidjeaQjJO6ny4snWqqeY4N3P73HfAXYA28EH9Cf_sH7XkA3JDvfPAVL-9vv5ip9uE732x_tgO78FRz-FA1yMZhkE_c919M2QXdLydXVXvRkJGI_h_Xo7LNW3ot3RUmf7ZIsrceSrnzdeOwnVTH0yJJ1cUs4efC4BCrQfXw0uv3u06S-DUEl6infWnVuKI/w113-h200/IMG_0279.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "2766733229592369380",
+      "title": "Bolinho de Quinoa com Cenoura para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/bolinho-de-quinoa-com-cenoura-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4mriGymQ1W7ZUfgWEt_D7djb4rXJFDeCnUoIEmmu9p8kX49pvGDbIuqDpcVWv-AuHRlpicJejr3AubRrB6ImNySB3HqhEW5m8ZAPGFuiGIUmciDIIxeiOGLGJ8JBqsdtlI7qchU7uxP_aofH0Z5Wtavd63f5dG3VfY992GpXOLpCnwocSbCKGtXisMVQ/s320/IMG_0278.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "3734170917112492443",
+      "title": "Panqueca de Espinafre para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/panqueca-de-espinafre-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhp33bP9y0fmFi1Mo7bNgjE1VGT_EZ69HrBZyPaQ3848wS4AhW-A5z0Rhrl090CCIls35Bri3kRQqGaI3xhyphenhyphendhB2yytAZBRfEZbS4ERETA2LM_RaB2RyRzBhB7BkJ39GNVWhLm1YXNbnpSYao3q6GVarZIXW2_19joQS5QeIdbPZ2p1ThF_bwZ5SUxMS2I/w320-h221/IMG_0277.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "4386402784459926668",
+      "title": "Risoto Cremoso de Abobrinha para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/risoto-cremoso-de-abobrinha-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpbj5ps24_euvB8bxVIH7pI2IuIlhio9M9qu4CJmhGiLUY1VB8NEhImvdrHZV9Ry1ear_pP-lDQ02xgt4cvuch6t8x185jI2TyeLOiqV4UWvqxMw09bwdQ0U7tBY6D1dBvYJfWhWN6yxZ_Zf1c49vOiSGBOzSYY2KsLbvDqPfZ1_XX4QdeEjdjHk7ciOk/w320-h320/IMG_0271.webp"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "6870810661202788984",
+      "title": "Sopa Creme de Abóbora com Lentilha para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/sopa-creme-de-abobora-com-lentilha-para.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [],
+      "has_image": false,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "5616951041399897623",
+      "title": "Bolinho de Peixe para Bebês (Assado)",
+      "url": "https://www.receitasparapequenos.site/2026/07/bolinho-de-peixe-para-bebes-assado.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTlUTupbkV031ofDvwDppQeQhfQp_RWDtfrhbJH9zYB6xQEEmp7LVlmuQZEdWtU1FqNEdUbal5V6oPO2ldOvyLJMfyx3M5DP4DcmrGSZSxtNjb8hNzLgdMgunJIZGUD0oHa6apQjnOPvuZSLvlr5HKfuiMT5zkGEB6HxGhM6wGUcP733oVBX0sjInlZFQ/w180-h320/IMG_0269.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "3854147161351079039",
+      "title": "Purê de Manga com Aveia para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/pure-de-manga-com-aveia-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbxhZx9qm_dWhNLbg1LD3nUmFa7v0UZZHj_AD8T8qh-QFN5P5qguABEHY1gH23rNej7-_W5trgL8EmT4sbddDHcokfxXaLMGjj5jsNe2PNvKDTpGOCvEypWdC5MIp9Ys5d4Pz0t_DqrO2Vh128t5O3QcSWkBtG-b_grupOcjznsxyBLEE2GrWe_G17o1Y/w320-h240/IMG_0268.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "6925846125967362523",
+      "title": "Arroz Doce Sem Açúcar para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/arroz-doce-sem-acucar-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.WlxAEy2-msOyexrM3PF2rQHaFU?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "1439655389617562659",
+      "title": "Iogurte Natural com Manga para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/iogurte-natural-com-manga-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse1.explicit.bing.net/th/id/OIP.Rm2y73JQ70FrMOT2Y3ldSgHaE8?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "262950663867407846",
+      "title": "Pão de Banana Sem Açúcar para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/pao-de-banana-sem-acucar-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse1.mm.bing.net/th/id/OIP.LvuJMz_tMXNeOO2la1tabgHaE7?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "2266833717767489482",
+      "title": "Hambúrguer Caseiro de Lentilha para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/hamburguer-caseiro-de-lentilha-para.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.-1dV7O_wBgavB3mDf3g18QHaEc?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "8908547051395980329",
+      "title": "Papinha de Frutas Amassadas para Bebês (sem cozinhar)",
+      "url": "https://www.receitasparapequenos.site/2026/07/papinha-de-frutas-amassadas-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://th.bing.com/th/id/OIP.Rei_4KteB96c-9OM3PWtAgHaE3?w=241&amp;h=180&amp;c=7&amp;r=0&amp;o=7&amp;pid=1.7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "7960969834434699318",
+      "title": "Omelete de Espinafre para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/omelete-de-espinafre-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.nyVg-62ud7Yu42KcCI5P_gHaFD?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "6210490324212826340",
+      "title": "Nhoque de Batata-Doce para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/nhoque-de-batata-doce-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse1.mm.bing.net/th/id/OIP.C3gKePWK3ZLYjklQq-lD_AHaEK?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "3868726384950060542",
+      "title": "Sopa Cremosa de Ervilha para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/07/sopa-cremosa-de-ervilha-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://th.bing.com/th/id/OIP.DCImMK89PUp5FNnBCktX7gHaE8?r=0&amp;o=7rm=3&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "7455163115938467054",
+      "title": "Bolinho de Brócolis Assado para Bebês (método BLW)",
+      "url": "https://www.receitasparapequenos.site/2026/07/bolinho-de-brocolis-assado-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://th.bing.com/th/id/R.14e608ad0127d617654b9dc5a5fe523d?rik=1fEuPmRXb64YxQ&amp;pid=ImgRaw&amp;r=0"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "6707542825267940027",
+      "title": "Purê de Abóbora com Frango para Bebês (a partir dos 6 meses)",
+      "url": "https://www.receitasparapequenos.site/2026/07/pure-de-abobora-com-frango-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.Nvw4nv-VLtYAA7LUYxNXBAHaD5?r=0&amp;rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "4124458171406724203",
+      "title": "Pãozinho de Mandioquinha para Bebês: Macio e Fácil de Fazer",
+      "url": "https://www.receitasparapequenos.site/2026/06/paozinho-de-mandioquinha-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimJGXt9lZcaYifw82cdhdk6T4xv7KA_SEo0tAhO37s8Fn4CZiNRYdmMLPheWBp_TV8m7MZu0PhGMfPJAn3W-jACqoVUowSorQ9ZlWvOgrd5F6T48da2OjZVxPHtIyp9wxxdRrm9TpQOPflm-1yXHQrpg3O3nqGaHUO_LgzSAtwOBpDXCREQ1NbVMJXpOM/w200-h200/paozinho-de-mandioquinha.webp"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "6839435741577799521",
+      "title": "Biscoito de Banana e Aveia para Bebês (Sem Açúcar)",
+      "url": "https://www.receitasparapequenos.site/2026/06/biscoito-de-banana-e-aveia-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpi86hWWA3yoEKUCfQvHPScJZZxLPFVGrPvKef9xX8ySJJbvSn2LqnttIuivbjcuPFYjOhBE2bowbIrWZLvhioMozsC14TDdSFWIHGyXhOxSjbr-CXQeN3Vx5TdO6uYRBLiBPeEpywqCDeK3v-hjqfpczstMyryFR1wnMLnvKTK3bPrMuP6bbDDnRRoF8/w200-h113/maxresdefault.jpg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "1619217400031897887",
+      "title": "Bolinho de Cenoura e Aveia para Bebês: Receita Saudável e Assada",
+      "url": "https://www.receitasparapequenos.site/2026/06/bolinho-de-cenoura-e-aveia-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://lh3.googleusercontent.com/-LAUD32bqt48/YAbguz8bf4I/AAAAAAAALY4/MuPU5c5kh9oFDBedL_jz5oZue9vl1ykoACLcBGAsYHQ/w200-h150/1611063481716140-4.png"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "63249063241970148",
+      "title": "Muffin de Maçã para Bebês (Sem Açúcar)",
+      "url": "https://www.receitasparapequenos.site/2026/06/muffin-de-maca-para-bebes-sem-acucar.html",
+      "labels": [
+        "Lanches e BLW",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://2.bp.blogspot.com/-RNKslN_RUYI/WWMV3K4QhuI/AAAAAAAADtg/rVjHexX1U1wdl6QVYQIej82F1blQhCnPACKgBGAs/w200-h113/IMG_8642.JPG"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "3337827010498872235",
+      "title": "Panqueca de Banana com Aveia para Bebês",
+      "url": "https://www.receitasparapequenos.site/2026/06/panqueca-de-banana-com-aveia-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://tse4.mm.bing.net/th/id/OIP.LyZLead45zuu_EQvIiPqaQHaIC?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3"
+      ],
+      "has_image": true,
+      "bing_hotlink": true,
+      "medicalish_title": false
+    },
+    {
+      "id": "2009281823946559015",
+      "title": "Bolo de Banana para Bebês (Sem Açúcar): Receita Saudável, Fofinha e Fácil",
+      "url": "https://www.receitasparapequenos.site/2026/06/bolo-de-banana-para-bebes-sem-acucar.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5VgLpv9HhyphenhyphenCdMA1Xzg7fWN_St87OwmTBgB9_itQa6ch8UvLjoFmi36jJflX0rU4N15prHcfRLG8VIsnfUtZh0eXGOkHbk4LLZsU_vnBGC403Wr4JN-GbLoQTYaecxcf5D1b1qEtf8iaeiD4zsLNZF6ddPyYQJPZIpmZ1Dvjg2zA2aWvyzjGjmQOq-6gc/w200-h150/a01.webp"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "8274275396897033338",
+      "title": "🌽 Bolo de Milho para Bebês — Saudável, Macio e Sem Açúcar!",
+      "url": "https://www.receitasparapequenos.site/2025/11/bolo-de-milho-para-bebes-saudavel-macio.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiuvakUHIfNYcHbjhw6CUs-5uEtwFZmZ9mdO0reUsQEhOXQx-TTsfN3UAsrWjPP1Yo0Unwo_hXYH9Msc795BD4_CaZxdOPJ4TJhJ4cUuGh3bk5mWwGzwPGih9AMxdPR2owbUutPT7F_K0eDHHIBvyvUAt4fla3hlKKGWbNNkyyVClazZy76RMfkeCVGVyQ/w160-h200/WhatsApp%20Image%202025-11-03%20at%2011.59.00.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "4143374069931407486",
+      "title": "🍗 Strogonoff Saudável de Frango para Bebês — Cremoso, Nutritivo e Delicioso!",
+      "url": "https://www.receitasparapequenos.site/2025/10/strogonoff-saudavel-de-frango-para.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9onA7IpGbIbaYzY3i2_LEx4BzMLo7SdpmYGIbNAZBSyfTi820h_XiKliYktHmp_jqDOCm1ZtZ24yGgidNURNZRKTiEG7jGsqv5q3rFJic34oPC7-rGqm2FMR_f2Ji11BiC28QtGbAvCj8hxTZp2VgUxCf1dIFmqTmbonzKsYJvZ2vU5po1od3D4faCrI/w113-h200/WhatsApp%20Image%202025-10-31%20at%2016.56.05.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "8501849809012025165",
+      "title": "🥔🍗 Creminho de Batata com Frango para Bebês — Saudável, Nutritivo e Prático!",
+      "url": "https://www.receitasparapequenos.site/2025/10/creminho-de-batata-com-frango-para_31.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEha8sZv9Pd6fdWYhiGDCk7ZAG5acP0yKyvCOLgt6HY2cT3sVWRP343fT3JBPcryDgJy4N-oyOp2JlxKm_xCI-OPy08NlBZFpPzYimsrWB-4QeZ43aA6UTSQKI-SlxXb1-eCl2cQN0OeugwRJ_Iy5G7kjvaB0qYaccVCJ65wlLJhbZDNVr9VNU7uqN5yXAE/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.37.35.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "5279448040476452282",
+      "title": "🍎 Bolo de Maçã para Bebês — Saudável, Macio e Nutritivo!",
+      "url": "https://www.receitasparapequenos.site/2025/10/bolo-de-maca-para-bebes-saudavel-macio.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKiK8BcwuxvFa4TJvjUG5vVy618B6WeNgBTTAin86GUNHm3nUia77O5OJuBuyendPW_PZkGldEDHY5Q7jU8GG7ndeF6PeL-TtGM2dsxwHRUrqljlFumaaGlyY0qopZ-zHPMnmIeF2VFcOou1jV0A14JmHxQXSIKhiGCTCN6A61PGP1RmJ4kthv8Dy6KHc/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.32.13.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "6109033704081564588",
+      "title": "🍌🥕 Danoninho da Imunidade para Bebês — Saudável, Nutritivo e Prático!",
+      "url": "https://www.receitasparapequenos.site/2025/10/danoninho-da-imunidade-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDEJP3k0gpEX7RKI3S5Nzxsu_fR-UXrX_JU-n-f4gt0jDJ0ex8oGUCxQIrXEVeCKgRUepj7-q2X0Ed_oTghahXIERPJ27_Dz-3-26EbNWf1znNZOq5j5mMoBEXo002ucKu0diTZotC0uM-JrABDTSjv1D34wg7tdtUiDOJTuNTfhzOzO4O1F4q4uWnUI4/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.26.53.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": true
+    },
+    {
+      "id": "7934129501632116730",
+      "title": "🥩 Bolinho de Carne para Bebês — Saudável, Macio e Prático!",
+      "url": "https://www.receitasparapequenos.site/2025/10/bolinho-de-carne-para-bebes-saudavel.html",
+      "labels": [
+        "Lanches e BLW",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTH8CQSn3rC4ZosKo5oplyUcBoIkfc_o_CeZtAFd8uVnCMsi9d5W5eGQv7r4M7k7H57VQK23VMgC9prqhJiwlCBtSw5b9PC1IpKVQeMcu8hdqxro6thiBObYOvV-ENTXKJnuHPYZVASaYdUVcYNZO5QdlEzacTEExIhzLDvs3WXrk3GshmoQLivtNocDE/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.22.03.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "6357366339284201654",
+      "title": "🥕🍎 Bolo de Cenoura e Maçã para Bebês — Saudável, Macio e Nutritivo!",
+      "url": "https://www.receitasparapequenos.site/2025/10/bolo-de-cenoura-e-maca-para-bebes.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhV3IuO5OU4B_su8rL8CU84Ig4xwCo32lhYWx7j9PYn1BmCGr7BLUpiqtpjqeY8nViHdkw6c3YLC_ZtZrCPe1i5MZJQy5_pBwhqRJKMs4O6dqntZ8pw9uodWdcp68E6Gn_i4mqhdItptlofik6RtZMdVcungS09kUXbaleevM9cPWKiqWyJQ2jY2-1lYpI/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.17.18.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "5086629506682659098",
+      "title": "🥖 Pão de Tapioca para Bebês — Saudável, Macio e Fácil de Preparar!",
+      "url": "https://www.receitasparapequenos.site/2025/10/pao-de-tapioca-para-bebes-saudavel.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNV5A08mb2t8ZC_SvSQpl-mYpphjG4-S2kji7JV04b2BAUdlKtguMdOBMqcmJijpLvhceliiPL_y48BrXEEPWqKosUdEwnuTUJrni-UJMLRYCaET_i4SzYqFJdu8SZPjZKcjNsEgolhfROIe_9CBHt742Z0JsX_DwHVLYkdAT1XLpkeb4JRR80JwFK-cQ/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.08.20.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "1211779941152902527",
+      "title": "🍪 Bolachinha Nutritiva para Bebês — Saudável, Saborosa e Fácil de Fazer!",
+      "url": "https://www.receitasparapequenos.site/2025/10/bolachinha-nutritiva-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRG774oq2i7P-Lg8cx2ohi50RxAnuLFPsUpI8zt22j7NTROWxaC7az580qCvyA_pUhS2Je2nBe5ams5JeEulD5oYhmH9NfVJAdBFkuqnXTTM_Z1eVnH6vO-d80enqY9wAI6JgLfRIjjsb_7gIiE3ESkHt_SoRlvz0OieqyX2b9YBnMxGSgDP_pvT7Wk_0/w160-h200/WhatsApp%20Image%202025-10-31%20at%2009.00.50.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "1047704925283349534",
+      "title": "🍗 Hambúrguer de Frango para Bebês — Saudável, Nutritivo e Prático!",
+      "url": "https://www.receitasparapequenos.site/2025/10/hamburguer-de-frango-para-bebes.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHVL5KUgQsGxS49X0Pt97Ozpe7X_B8Pz1z-ri-4sMPyIGZNYIcw-1cEm3AC9fgnHTnsICBn7M_eoBHkf-AZI4g2K11oI_NY1inOPEFCbj_s5mcmB4Evn36Pastnri4SCZj2vUJf5tsvS2Eef3T4isP8W_V4rZnAB2ioMDoLdxKjyaDt-5qiV8UMcMLhOk/w160-h200/WhatsApp%20Image%202025-10-31%20at%2008.55.38.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "1518727623815963061",
+      "title": "🥕 Panqueca de Cenoura para Bebês — Saudável, Macia e Colorida",
+      "url": "https://www.receitasparapequenos.site/2025/10/panqueca-de-cenoura-para-bebes-saudavel.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjunb-cSS-np1hyphenhyphenFMzYs1krax2jDpJyBUu6tcTKk725CKDd7bNGh3Fp2dUiWLoNKAXI1lZVXwmL4Ke2IUjpH7U1573yjeYl8Gaw4XCoT7O5QiE0St_s9CMQY3WQBupmrMJDmmhgBJQ31_3BtERj6jNoioaAhI28GJoIEjnS70ff261tmv-6sXqcO0GvP_4/w160-h200/WhatsApp%20Image%202025-10-31%20at%2008.44.25.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "3800026413535332359",
+      "title": "🥩 Croquete de Carne para Bebês — Saudável, Nutritivo e Cheio de Sabor",
+      "url": "https://www.receitasparapequenos.site/2025/10/croquete-de-carne-para-bebes-saudavel.html",
+      "labels": [
+        "Papinhas e Purês",
+        "Refeições"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgifk9KYk8wXXKRwoBs3_K6EkcOegz57Eu_SryoUNaHc-tlp2vFSTSxgZnn6Pzf4hHErrAQYXxWB6oiNetxEAEs1VUDV8SOXIP47LryGIYHtdi-Z9BLJ6eSKaClyggukpM3vqztLVjEABANU2FkBERmkD6YxpimFGmqogeVybvzTstiTvkj4pkLe8nVEAo/w160-h200/WhatsApp%20Image%202025-10-31%20at%2008.33.53.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    },
+    {
+      "id": "2171059362890403999",
+      "title": "🍊 Bolo de Laranja para Bebês — Leve, Nutritivo e Cheio de Sabor!",
+      "url": "https://www.receitasparapequenos.site/2025/10/bolo-de-laranja-para-bebes-leve.html",
+      "labels": [
+        "Lanches e BLW",
+        "Papinhas e Purês",
+        "Refeições",
+        "Sem Açúcar"
+      ],
+      "has_author": true,
+      "has_recipe_schema": true,
+      "images": [
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqQ54Zk58gybXv4OI5-BnOJl9_IPBIHGP5bU3ccM7-EzfwGspjIn7pJgQKvXCcmNoYHeHhZrq_NJBPNcuaCz_wz1gx_9LsW6QR1dbgLRDs5_2Ify_36-WIFYvUSxXW_0qgq2wVeiMWS4A_6ixHQxHuQ8RZdSB6-ei4rMOqO8HuVaEyfliiQS8T9ibCQdo/w160-h200/WhatsApp%20Image%202025-10-31%20at%2008.06.08.jpeg"
+      ],
+      "has_image": true,
+      "bing_hotlink": false,
+      "medicalish_title": false
+    }
+  ]
+}
