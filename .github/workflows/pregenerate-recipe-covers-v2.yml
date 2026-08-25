@@ -1,0 +1,78 @@
+name: Pre-generate recipe AI covers v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/pregenerate-recipe-covers-v2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  pregenerate:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - start: 12
+            end: 19
+          - start: 20
+            end: 32
+          - start: 33
+            end: 45
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pillow
+      - name: Generate this range in parallel
+        env:
+          START_INDEX: ${{ matrix.start }}
+          END_INDEX: ${{ matrix.end }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          python - <<'PY'
+          import concurrent.futures, hashlib, importlib.util, os
+          from pathlib import Path
+          spec=importlib.util.spec_from_file_location('m','recipes-site/migrate_recipe_covers_v2.py')
+          m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+          tok=m.token(); items=m.posts(tok)
+          start=int(os.environ['START_INDEX']); end=int(os.environ['END_INDEX'])
+          jobs=[]
+          for idx,p in enumerate(items,1):
+              if idx<start or idx>end: continue
+              pid=str(p['id']); title=p.get('title') or 'Receita para pequenos'; suffix=hashlib.sha1(title.encode()).hexdigest()[:8]
+              path=m.COVER_DIR/f'{pid}-{suffix}.jpg'
+              if not path.exists(): jobs.append((title,pid,path))
+          failures=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+              futs={pool.submit(m.make_image,t,pid,path):(t,pid) for t,pid,path in jobs}
+              for f in concurrent.futures.as_completed(futs):
+                  t,pid=futs[f]
+                  try: f.result()
+                  except Exception as e: failures.append(f'{pid}|{t}|{e}')
+          status=Path(f'recipes-site/pre-v2-{start}-{end}.txt')
+          status.write_text(f'outcome={"success" if not failures else "failed"}\nstart={start}\nend={end}\ngenerated={len(jobs)-len(failures)}\nfailures={len(failures)}\n'+''.join('failure='+x+'\n' for x in failures),encoding='utf-8')
+          if failures: raise SystemExit(1)
+          PY
+      - name: Commit this range
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/recipes-covers-ai-v2 recipes-site/pre-v2-${{ matrix.start }}-${{ matrix.end }}.txt
+          git commit -m "Pre-generate AI recipe covers ${{ matrix.start }}-${{ matrix.end }}" || true
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main || { sleep 3; continue; }
+            git push origin main && break
+            sleep 4
+          done
