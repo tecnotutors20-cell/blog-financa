@@ -1,0 +1,44 @@
+name: Validate recipes source
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/validate-recipes-source.yml
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Decode and validate
+        run: |
+          python - <<'PY'
+          import base64, gzip, hashlib, re
+          from pathlib import Path
+          src=Path('recipes-site/source/TODAS_AS_RECEITAS.html.gz.b64')
+          raw=base64.b64decode(src.read_text(encoding='utf-8').strip())
+          html=gzip.decompress(raw)
+          count=len(re.findall(br'<section\s+class=["\']recipe["\']',html,re.I))
+          ok=(count==45 and len(html)>150000)
+          Path('recipes-site/source-validation.txt').write_text(
+              f'outcome={"success" if ok else "failed"}\nsections={count}\nbytes={len(html)}\nsha256={hashlib.sha256(html).hexdigest()}\n',
+              encoding='utf-8')
+          if not ok: raise SystemExit(1)
+          Path('recipes-site/source/TODAS_AS_RECEITAS.html').write_bytes(html)
+          PY
+      - name: Commit validation and decoded source
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recipes-site/source-validation.txt recipes-site/source/TODAS_AS_RECEITAS.html 2>/dev/null || true
+          git commit -m "Validate optimized recipes source" || true
+          git pull --rebase origin main
+          git push origin main
