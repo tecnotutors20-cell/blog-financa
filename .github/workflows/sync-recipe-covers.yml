@@ -1,0 +1,67 @@
+name: Sync recipe covers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/sync-recipe-covers.yml
+  schedule:
+    - cron: '30 13 * * *'
+    - cron: '30 18 * * *'
+    - cron: '30 23 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  covers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install cover dependencies
+        run: python -m pip install pillow beautifulsoup4
+
+      - name: Generate any missing recipe covers
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python recipes-site/sync_recipe_covers.py
+
+      - name: Commit generated covers before Blogger update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/recipes-covers recipes-site/cover-sync-result.txt
+          git commit -m "Generate original covers for recipe posts" || true
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Sync every Blogger post to its original cover
+        env:
+          SYNC_BLOGGER: '1'
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          sleep 8
+          python recipes-site/sync_recipe_covers.py
+
+      - name: Record final cover status
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add recipes-site/cover-sync-result.txt
+          git commit -m "Record recipe cover sync result" || true
+          git push origin main
