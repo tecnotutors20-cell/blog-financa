@@ -1,0 +1,40 @@
+name: Force sync all recipe covers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/force-sync-recipe-covers.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install pillow beautifulsoup4
+      - name: Sync generated covers directly to Blogger
+        env:
+          SYNC_BLOGGER: '1'
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python recipes-site/sync_recipe_covers.py
+      - name: Commit result
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add recipes-site/cover-sync-result.txt
+          git commit -m "Record forced recipe cover sync" || true
+          git push origin main
