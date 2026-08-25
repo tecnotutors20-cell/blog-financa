@@ -1,3 +1,6 @@
-phase=generated
+outcome=success
 posts=45
 generated=0
+updated=0
+already_ok=45
+failures=0
