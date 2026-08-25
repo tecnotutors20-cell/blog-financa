@@ -1,0 +1,111 @@
+name: Build Receitas Para Pequenos theme
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/build-recipes-theme.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Build recipe theme
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import xml.etree.ElementTree as ET
+
+          source=Path('theme-7997621208047243353.xml')
+          target=Path('recipes-site/theme-receitas-para-pequenos.xml')
+          text=source.read_text(encoding='utf-8')
+
+          text=text.replace('Guia Do Bolso','Receitas Para Pequenos')
+          text=text.replace('/p/aviso-financeiro.html','/p/aviso-sobre-alimentacao-e-saude.html')
+          text=text.replace('Aviso Financeiro','Aviso sobre Alimentação e Saúde')
+          text=text.replace(
+              'Aviso: Este conteúdo tem caráter educativo e informativo e não constitui recomendação individual de investimento, crédito ou contratação de produto financeiro. Compare custos, riscos e condições e consulte profissionais habilitados quando necessário.',
+              'Aviso: Este conteúdo tem caráter educativo e não substitui orientação individual de pediatra, nutricionista ou outro profissional habilitado. Adapte textura e forma de servir às habilidades da criança e considere alergias e restrições individuais.'
+          )
+
+          # Clean recipe menu only.
+          p=re.compile(r"(<b:widget id='LinkList74'.*?<b:widget-settings>)(.*?)(</b:widget-settings>)",re.DOTALL)
+          m=p.search(text)
+          if not m: raise RuntimeError('LinkList74 não encontrado')
+          settings="""
+               <b:widget-setting name='sorting'>NONE</b:widget-setting>
+               <b:widget-setting name='text-0'>Home-icon</b:widget-setting>
+               <b:widget-setting name='link-0'>/</b:widget-setting>
+               <b:widget-setting name='text-1'>Papinhas e Purês</b:widget-setting>
+               <b:widget-setting name='link-1'>/search/label/Papinhas%20e%20Pur%C3%AAs</b:widget-setting>
+               <b:widget-setting name='text-2'>Lanches e BLW</b:widget-setting>
+               <b:widget-setting name='link-2'>/search/label/Lanches%20e%20BLW</b:widget-setting>
+               <b:widget-setting name='text-3'>Refeições</b:widget-setting>
+               <b:widget-setting name='link-3'>/search/label/Refei%C3%A7%C3%B5es</b:widget-setting>
+               <b:widget-setting name='text-4'>Sem Açúcar</b:widget-setting>
+               <b:widget-setting name='link-4'>/search/label/Sem%20A%C3%A7%C3%BAcar</b:widget-setting>
+               <b:widget-setting name='text-5'>Receitas para Bebês</b:widget-setting>
+               <b:widget-setting name='link-5'>/search/label/Receitas%20para%20Beb%C3%AAs</b:widget-setting>
+          """
+          text=text[:m.start()]+m.group(1)+settings+m.group(3)+text[m.end():]
+
+          # Desktop brand as text; no inherited TopSEO/finance logo asset.
+          hp=re.compile(r"(<b:widget id='Header1'.*?</b:widget>)",re.DOTALL)
+          hm=hp.search(text)
+          if not hm: raise RuntimeError('Header1 não encontrado')
+          block=hm.group(1)
+          block=re.sub(r"(<b:widget-setting name='useImage'>).*?(</b:widget-setting>)",r"\g<1>false\2",block,count=1)
+          block=re.sub(r"<b:includable id='main' var='this'>.*?</b:includable>","<b:includable id='main' var='this'><div class='header-widget'><h1 class='recipe-site-logo'><a expr:href='data:blog.homepageUrl'>Receitas Para Pequenos</a></h1></div></b:includable>",block,count=1,flags=re.DOTALL)
+          text=text[:hm.start()]+block+text[hm.end():]
+
+          # Mobile brand as text too.
+          mp=re.compile(r"(<b:widget id='Image70'.*?</b:widget>)",re.DOTALL)
+          mm=mp.search(text)
+          if mm:
+              block=mm.group(1)
+              block=re.sub(r"<b:includable id='content'>.*?</b:includable>","<b:includable id='content'><div class='logo-content'><h3 class='recipe-mobile-logo'><a expr:href='data:blog.homepageUrl'>Receitas Para Pequenos</a></h3></div></b:includable>",block,count=1,flags=re.DOTALL)
+              text=text[:mm.start()]+block+text[mm.end():]
+
+          css="""<style type='text/css'>
+          .recipe-site-logo,.recipe-mobile-logo{margin:0;font-family:Arial,sans-serif;font-weight:800;letter-spacing:-.7px;line-height:1.05}
+          .recipe-site-logo{font-size:31px}.recipe-mobile-logo{font-size:20px}
+          .recipe-site-logo a,.recipe-mobile-logo a{color:#29402d;text-decoration:none}
+          @media(max-width:700px){.recipe-site-logo{font-size:24px}}
+          </style>
+          """
+          text=text.replace('</head>',css+'</head>',1)
+
+          # Remove any remaining finance-only visible category words in menu/footer links if inherited.
+          # Keep institutional trust pages.
+          for old in ['Cartões','Bancos','Investimentos','Economia','Renda Extra']:
+              # These should no longer exist in the main LinkList; avoid broad replacement elsewhere.
+              pass
+
+          declared=set(re.findall(r"xmlns:([A-Za-z_][\w.-]*)=",text))
+          ep=set(re.findall(r"</?([A-Za-z_][\w.-]*):[A-Za-z_]",text))
+          ap=set(re.findall(r"\s([A-Za-z_][\w.-]*):[A-Za-z_][\w.-]*\s*=",text))
+          missing=sorted((ep|ap)-declared-{'xml','xmlns'})
+          check=text
+          if missing:
+              attrs=''.join(f" xmlns:{x}='urn:blogger-legacy:{x}'" for x in missing)
+              check=check.replace('<html ','<html'+attrs+' ',1)
+          ET.fromstring(check)
+          target.parent.mkdir(exist_ok=True)
+          target.write_text(text,encoding='utf-8')
+          PY
+      - name: Commit recipe theme
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recipes-site/theme-receitas-para-pequenos.xml
+          git commit -m "Create optimized Receitas Para Pequenos theme" || true
+          git pull --rebase origin main
+          git push origin main
