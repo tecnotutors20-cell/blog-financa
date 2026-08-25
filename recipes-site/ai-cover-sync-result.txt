@@ -1,7 +1,5 @@
-outcome=failed
-phase=generation
+outcome=success
+phase=generated
 posts=46
-generated=44
-generation_failures=2
-failure=3636520046898973368|Almôndegas de Carne Moída com Legumes para Bebês|RuntimeError:falha ao gerar Almôndegas de Carne Moída com Legumes para Bebês: HTTP Error 429: Too Many Requests
-failure=6707542825267940027|Purê de Abóbora com Frango para Bebês (a partir dos 6 meses)|RuntimeError:falha ao gerar Purê de Abóbora com Frango para Bebês (a partir dos 6 meses): HTTP Error 429: Too Many Requests
+generated=46
+already_generated=0
