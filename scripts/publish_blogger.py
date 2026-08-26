@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "score de crédito: como funciona, o que influencia e por que a aprovação não é garantida": f"{COVER_BASE}/score-credito-guia-20260826.svg",
     "pix agendado pode ser cancelado? veja quando ainda dá tempo": f"{COVER_BASE}/pix-seguranca.jpg",
     "med do pix: como pedir devolução após golpe e qual é o prazo?": f"{COVER_BASE}/pix-seguranca.jpg",
     "pagar a fatura antes do fechamento libera limite? entenda como funciona": "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real/pagar-fatura-antes-fechamento.svg",
