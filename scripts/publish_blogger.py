@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "renegociação de dívidas: como negociar sem trocar uma dívida por outra pior": f"{COVER_BASE}/renegociacao-dividas-guia-20260827.svg",
     "quanto tempo depois de pagar uma dívida o score pode mudar?": f"{COVER_BASE}/score-apos-pagar-divida-20260826.svg",
     "consultar o score várias vezes diminui a pontuação? entenda a diferença entre consulta própria e consulta de empresas": f"{COVER_BASE}/consultar-score-varias-vezes-20260826.svg",
     "score de crédito: como funciona, o que influencia e por que a aprovação não é garantida": f"{COVER_BASE}/score-credito-guia-20260826.svg",
