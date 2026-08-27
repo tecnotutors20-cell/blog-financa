@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "dívida negociada pode voltar se eu atrasar o acordo? entenda o que acontece": f"{COVER_BASE}/divida-acordo-atrasado-20260827.svg",
     "vale a pena pegar empréstimo para pagar cartão de crédito? veja como comparar": f"{COVER_BASE}/emprestimo-pagar-cartao-20260827.svg",
     "renegociação de dívidas: como negociar sem trocar uma dívida por outra pior": f"{COVER_BASE}/renegociacao-dividas-guia-20260827.svg",
     "quanto tempo depois de pagar uma dívida o score pode mudar?": f"{COVER_BASE}/score-apos-pagar-divida-20260826.svg",
