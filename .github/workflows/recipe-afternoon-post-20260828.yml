@@ -1,0 +1,27 @@
+name: Publish afternoon oat cookie recipe
+on:
+  push:
+    paths:
+      - 'recipes-site/publish_recipe_20260828_1500.py'
+      - '.github/workflows/recipe-afternoon-post-20260828.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Publish recipe with unique AI food cover
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: python recipes-site/publish_recipe_20260828_1500.py
