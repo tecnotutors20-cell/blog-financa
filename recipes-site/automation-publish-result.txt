@@ -1,7 +1,7 @@
 outcome=success
-title=Muffin de Maçã e Aveia sem Açúcar para Bebê: Receita Macia
-url=https://www.receitasparapequenos.site/2026/08/muffin-de-maca-e-aveia-sem-acucar-para.html
-post_id=3171201667361850125
+title=Pão de Cenoura Caseiro para Bebê: Receita Macia sem Açúcar
+url=https://www.receitasparapequenos.site/2026/08/pao-de-cenoura-caseiro-para-bebe.html
+post_id=1034596717761306426
 cluster=Cluster 3 — Café da manhã e lanches sem açúcar
-cover_url=https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/recipes-covers-ai-v2/muffin-maca-aveia-sem-acucar-bebe-8e601098e0.jpg
+cover_url=https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/recipes-covers-ai-v2/pao-cenoura-caseiro-bebe-769f7da413.jpg
 marker_verified=true
