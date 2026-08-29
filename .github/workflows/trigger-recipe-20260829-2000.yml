@@ -1,0 +1,26 @@
+name: Publish evening recipe 2026-08-29 20h
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/trigger-recipe-20260829-2000.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - env:
+          BLOGGER_BLOG_ID: '6682336557114829830'
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python recipes-site/publish_recipe_20260829_2000.py
