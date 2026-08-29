@@ -1,0 +1,43 @@
+name: Publish Tesouro Selic early redemption long-tail SEO article
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/tesouro-selic-evening-20260829.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add Tesouro Selic article and cover mapping
+        run: python scripts/add_tesouro_selic_evening_20260829.py
+      - name: Commit content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/blogger_posts.json content/seo_clusters.json scripts/publish_blogger.py
+          git commit -m "Add Tesouro Selic early redemption long-tail article" || true
+          git pull --rebase origin main
+          git push origin main
+      - name: Publish to Blogger
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python scripts/publish_blogger.py
+      - name: Record success
+        run: |
+          printf 'outcome=success\nrun_id=%s\n' "$GITHUB_RUN_ID" > .tesouro-selic-evening-status
+          git pull --rebase origin main
+          git add .tesouro-selic-evening-status
+          git commit -m "Record Tesouro Selic publication" || true
+          git push origin main
