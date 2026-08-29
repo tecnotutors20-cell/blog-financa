@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "cdb com liquidez diária serve para reserva de emergência? veja o que avaliar": f"{COVER_BASE}/cdb-reserva-emergencia-20260829.svg",
     "liquidez na renda fixa: o que significa e quando você consegue resgatar o dinheiro": f"{COVER_BASE}/liquidez-renda-fixa-20260829.svg",
     "quanto da renda deve sobrar no fim do mês? existe uma porcentagem ideal?": f"{COVER_BASE}/quanto-renda-deve-sobrar-20260828.svg",
     "como montar um orçamento mensal simples sem planilha complicada": f"{COVER_BASE}/orcamento-simples-sem-planilha-20260828.svg",
