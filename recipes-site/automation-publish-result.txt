@@ -1,7 +1,7 @@
 outcome=success
-title=Iogurte Natural com Pera para Bebê: Lanche sem Açúcar
-url=https://www.receitasparapequenos.site/2026/08/iogurte-natural-com-pera-para-bebe.html
-post_id=1293814603402280797
-cluster=Cluster 3 — Café da manhã e lanches sem açúcar
-cover_url=https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/recipes-covers-ai-v2/iogurte-natural-pera-bebe-sem-acucar-80acf3cded.jpg
+title=Arroz Cremoso com Frango e Legumes para Bebê: Almoço Fácil
+url=https://www.receitasparapequenos.site/2026/08/arroz-cremoso-com-frango-e-legumes-para.html
+post_id=4925270112774756709
+cluster=Cluster 4 — Refeições com frango, carne e peixe
+cover_url=https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/recipes-covers-ai-v2/arroz-cremoso-frango-legumes-bebe-4a0a5cb2f8.jpg
 marker_verified=true
