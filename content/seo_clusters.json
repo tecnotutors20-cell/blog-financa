@@ -80,12 +80,13 @@
     {
       "name": "Segurança financeira",
       "existing": [
-        "Pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas"
+        "Pix com segurança: cuidados para reduzir o risco de golpes e transferências erradas",
+        "Celular roubado: como proteger contas bancárias, Pix e seus dados rapidamente"
       ],
       "next_long_tails": [
         "Fiz um Pix após cair em golpe: quais passos tomar imediatamente?",
-        "Celular roubado: como proteger contas bancárias rapidamente?",
-        "Como identificar falso atendimento de banco no WhatsApp?"
+        "Como identificar falso atendimento de banco no WhatsApp?",
+        "O que fazer se fizeram Pix ou empréstimo após roubarem meu celular?"
       ]
     }
   ]

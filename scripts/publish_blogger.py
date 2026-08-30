@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "celular roubado: como proteger contas bancárias, pix e seus dados rapidamente": f"{COVER_BASE}/celular-roubado-proteger-contas-20260830.svg",
     "tesouro selic pode perder dinheiro se resgatar antes do vencimento?": f"{COVER_BASE}/covers/tesouro-selic-resgate-antecipado-20260829.svg",
     "cdb com liquidez diária serve para reserva de emergência? veja o que avaliar": f"{COVER_BASE}/cdb-reserva-emergencia-20260829.svg",
     "liquidez na renda fixa: o que significa e quando você consegue resgatar o dinheiro": f"{COVER_BASE}/liquidez-renda-fixa-20260829.svg",
