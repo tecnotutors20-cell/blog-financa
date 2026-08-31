@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
-import runpy
+import runpy, hashlib, html, json, time
 from pathlib import Path
-ns=runpy.run_path(str(Path(__file__).with_name('publish_recipe_20260830_1500.py')),run_name='recipe_base')
-ns['TITLE']='Feijão Amassado com Abóbora para Bebê: Receita Cremosa e Simples'
-# Load the stable base directly because the 20260830_1500 helper depends on a non-exporting intermediate module.
-base=runpy.run_path(str(Path(__file__).with_name('publish_recipe_20260829_1000.py')),run_name='recipe_base')
-import hashlib, html, json, time
+base=runpy.run_path(str(Path(__file__).with_name('publish_recipe_20260825_1000.py')),run_name='recipe_base')
 TITLE='Feijão Amassado com Abóbora para Bebê: Receita Cremosa e Simples'; SLUG_KEY='feijao-amassado-abobora-bebe'; CLUSTER='Cluster 5 — Refeições com feijão, lentilha, grão-de-bico e outras leguminosas'; KEYWORD='feijão amassado com abóbora para bebê'
 MARKER=base['MARKER']; BLOG_ID=base['BLOG_ID']; COVER_DIR=base['COVER_DIR']; RAW_BASE=base['RAW_BASE']; LOG_PATH=base['LOG_PATH']; RESULT_PATH=base['RESULT_PATH']
 def article(cover):
