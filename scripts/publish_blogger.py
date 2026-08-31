@@ -19,6 +19,7 @@ WRITE_DELAY_SECONDS = 3.0
 MAX_RETRIES = 7
 COVER_BASE = "https://raw.githubusercontent.com/tecnotutors20-cell/blog-financa/main/assets/covers-real"
 COVER_BY_TITLE = {
+    "inflação e ipca: como a alta dos preços afeta seu dinheiro e seu poder de compra": f"{COVER_BASE}/inflacao-ipca-poder-compra-20260831.svg",
     "fiz um pix após cair em golpe: o que fazer imediatamente para tentar recuperar o dinheiro?": f"{COVER_BASE}/pix-golpe-o-que-fazer-20260830.svg",
     "como identificar falso atendimento de banco no whatsapp? 9 sinais de golpe": f"{COVER_BASE}/falso-atendimento-banco-whatsapp-20260830.svg",
     "celular roubado: como proteger contas bancárias, pix e seus dados rapidamente": f"{COVER_BASE}/celular-roubado-proteger-contas-20260830.svg",

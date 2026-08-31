@@ -88,6 +88,17 @@
       "next_long_tails": [
         "O que fazer se fizeram Pix ou empréstimo após roubarem meu celular?"
       ]
+    },
+    {
+      "name": "Economia e inflação",
+      "existing": [
+        "Inflação e IPCA: como a alta dos preços afeta seu dinheiro e seu poder de compra"
+      ],
+      "next_long_tails": [
+        "Por que meu salário aumenta e mesmo assim parece que compro menos?",
+        "IPCA e INPC: qual a diferença e qual índice afeta seu bolso?",
+        "Inflação acumulada: como calcular e entender reajustes na prática?"
+      ]
     }
   ]
 }
