@@ -1,0 +1,43 @@
+name: Publish economy inflation afternoon SEO article
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/economy-afternoon-post-20260831.yml
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Add economy afternoon article and cover mapping
+        run: python scripts/add_economy_afternoon_20260831.py
+      - name: Commit content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/blogger_posts.json content/seo_clusters.json scripts/publish_blogger.py
+          git commit -m "Add salary purchasing power economy article" || true
+          git pull --rebase origin main
+          git push origin main
+      - name: Publish to Blogger
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: python scripts/publish_blogger.py
+      - name: Record success
+        run: |
+          printf 'outcome=success\nrun_id=%s\n' "$GITHUB_RUN_ID" > .economy-afternoon-status
+          git pull --rebase origin main
+          git add .economy-afternoon-status
+          git commit -m "Record economy afternoon publication" || true
+          git push origin main
