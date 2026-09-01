@@ -1,0 +1,164 @@
+name: Audit Receitas Para Pequenos for AdSense
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/adsense-recipes-audit.yml
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install beautifulsoup4
+      - name: Audit live Blogger content
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os, re, json, html, urllib.parse, urllib.request
+          from pathlib import Path
+          from collections import Counter
+          from bs4 import BeautifulSoup
+
+          BLOG_ID='6682336557114829830'
+          API='https://www.googleapis.com/blogger/v3'
+          tokreq=urllib.request.Request('https://oauth2.googleapis.com/token',data=urllib.parse.urlencode({
+              'client_id':os.environ['GOOGLE_CLIENT_ID'],
+              'client_secret':os.environ['GOOGLE_CLIENT_SECRET'],
+              'refresh_token':os.environ['GOOGLE_REFRESH_TOKEN'],
+              'grant_type':'refresh_token'}).encode(),method='POST')
+          tokreq.add_header('Content-Type','application/x-www-form-urlencoded')
+          with urllib.request.urlopen(tokreq,timeout=30) as r: token=json.load(r)['access_token']
+          def get(path, params=None):
+              u=API+path
+              if params:u+='?'+urllib.parse.urlencode(params)
+              req=urllib.request.Request(u,headers={'Authorization':f'Bearer {token}','Accept':'application/json'})
+              with urllib.request.urlopen(req,timeout=45) as r:return json.load(r)
+          posts=[]; page=None
+          while True:
+              p={'maxResults':500,'fetchBodies':True,'status':'LIVE','view':'ADMIN'}
+              if page:p['pageToken']=page
+              d=get(f'/blogs/{BLOG_ID}/posts',p); posts+=d.get('items',[]); page=d.get('nextPageToken')
+              if not page:break
+          pages=[]; page=None
+          while True:
+              p={'maxResults':500,'view':'ADMIN'}
+              if page:p['pageToken']=page
+              d=get(f'/blogs/{BLOG_ID}/pages',p); pages+=d.get('items',[]); page=d.get('nextPageToken')
+              if not page:break
+
+          risk_terms=[
+            r'fortalece.{0,15}imun', r'imunidade', r'previne', r'cura', r'trata', r'anemia',
+            r'fácil de digerir', r'melhora.{0,20}desenvolvimento', r'faz bem para', r'superalimento'
+          ]
+          age_terms=[r'a partir dos? \d+', r'\d+[\-–]\d+ meses', r'\d+ meses']
+          rows=[]
+          all_prefix=[]
+          for p in posts:
+              raw=p.get('content') or ''
+              soup=BeautifulSoup(raw,'html.parser')
+              text=' '.join(soup.stripped_strings)
+              words=re.findall(r"[A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9'’-]*",text)
+              links=[a.get('href','') for a in soup.find_all('a')]
+              internal=sum(1 for x in links if 'receitasparapequenos.site' in x or x.startswith('/'))
+              imgs=soup.find_all('img')
+              imgsrc=[i.get('src','') for i in imgs]
+              own_ai=any('assets/recipes-covers-ai-v2' in x for x in imgsrc)
+              old_cover=any('assets/recipes-covers/' in x for x in imgsrc)
+              external_img=sum(1 for x in imgsrc if x.startswith('http') and 'raw.githubusercontent.com/tecnotutors20-cell/blog-financa' not in x and 'blogger.googleusercontent.com' not in x)
+              artifacts=[]
+              lowraw=raw.lower()
+              for needle in ['font-claude-response-body','data-sourcepos','chatgpt','claude-response','text-text-100']:
+                  if needle in lowraw: artifacts.append(needle)
+              risks=[]
+              low=text.lower()
+              for pat in risk_terms:
+                  if re.search(pat,low): risks.append(pat)
+              ages=[]
+              for pat in age_terms:
+                  ages += re.findall(pat,low)
+              h2h3=[h.get_text(' ',strip=True) for h in soup.find_all(['h2','h3'])]
+              prefix=' '.join(words[:100]).lower()
+              all_prefix.append((p.get('id'),prefix))
+              rows.append({
+                  'id':p.get('id'),'title':p.get('title'),'url':p.get('url'),'words':len(words),
+                  'internal_links':internal,'images':len(imgs),'own_ai_cover':own_ai,'old_cover':old_cover,
+                  'external_images':external_img,'html_artifacts':artifacts,'risk_terms':risks,
+                  'age_claims':ages,'headings':len(h2h3),'labels':p.get('labels') or []
+              })
+
+          # rough structural similarity by identical first 100-word prefixes after removing title-ish tokens
+          # and duplicate title families.
+          title_norm=[]
+          for r in rows:
+              t=re.sub(r'\b(para|beb[eê]s?|saud[aá]vel|nutritiv[oa]|f[aá]cil|simples|macio|macia)\b','',r['title'].lower())
+              t=re.sub(r'[^a-zà-ÿ0-9]+',' ',t).strip()
+              title_norm.append(t)
+          dup_titles=[x for x,c in Counter(title_norm).items() if c>1]
+
+          def pct(n,d): return round(100*n/d,1) if d else 0
+          report=[]
+          report.append('# Auditoria AdSense — Receitas Para Pequenos')
+          report.append('')
+          report.append(f'- Posts publicados: **{len(rows)}**')
+          report.append(f'- Páginas estáticas: **{len(pages)}**')
+          report.append(f'- Posts com menos de 500 palavras: **{sum(r["words"]<500 for r in rows)}** ({pct(sum(r["words"]<500 for r in rows),len(rows))}%)')
+          report.append(f'- Posts com menos de 350 palavras: **{sum(r["words"]<350 for r in rows)}**')
+          report.append(f'- Posts sem link interno: **{sum(r["internal_links"]==0 for r in rows)}**')
+          report.append(f'- Posts com artefatos visíveis de HTML de IA/editor: **{sum(bool(r["html_artifacts"]) for r in rows)}**')
+          report.append(f'- Posts com termos de saúde que merecem revisão: **{sum(bool(r["risk_terms"]) for r in rows)}**')
+          report.append(f'- Posts com afirmações de idade específicas: **{sum(bool(r["age_claims"]) for r in rows)}**')
+          report.append(f'- Posts com capa AI-v2 própria: **{sum(r["own_ai_cover"] for r in rows)}**')
+          report.append(f'- Posts ainda com capa antiga de template: **{sum(r["old_cover"] for r in rows)}**')
+          report.append(f'- Posts com imagem externa/hotlink: **{sum(r["external_images"]>0 for r in rows)}**')
+          report.append(f'- Famílias de títulos potencialmente duplicadas: **{len(dup_titles)}**')
+          report.append('')
+          report.append('## Páginas')
+          for p in pages: report.append(f'- {p.get("title")} — {p.get("url")}')
+          report.append('')
+          report.append('## Posts que mais precisam de revisão')
+          scored=[]
+          for r in rows:
+              score=(r['words']<500)*3+(r['words']<350)*2+(r['internal_links']==0)*2+bool(r['html_artifacts'])*3+bool(r['risk_terms'])*3+bool(r['age_claims'])*1+(not r['own_ai_cover'])*1+r['external_images']*1
+              if score: scored.append((score,r))
+          for score,r in sorted(scored,key=lambda x:(-x[0],x[1]['title'])):
+              report.append(f'- **{r["title"]}** — score {score}; {r["words"]} palavras; links internos {r["internal_links"]}; artefatos={r["html_artifacts"]}; saúde={r["risk_terms"]}; idade={r["age_claims"]}; ai-v2={r["own_ai_cover"]}; imagens externas={r["external_images"]}')
+          report.append('')
+          report.append('## Diagnóstico automático')
+          if sum(r['words']<500 for r in rows)>len(rows)*0.4:
+              report.append('- ALERTA: grande parte do acervo é curta para um nicho em que confiança e contexto importam; reforçar utilidade real e diferenciação.')
+          if sum(bool(r['html_artifacts']) for r in rows):
+              report.append('- ALERTA: há marcas de HTML vindas de ferramentas de IA/editor. Remover classes/data attributes estranhos.')
+          if sum(bool(r['risk_terms']) for r in rows):
+              report.append('- ALERTA: revisar alegações de saúde/nutrição para linguagem neutra e fontes oficiais.')
+          if sum(r['internal_links']==0 for r in rows)>0:
+              report.append('- ALERTA: há posts isolados sem links internos contextuais.')
+          if sum(r['own_ai_cover'] for r in rows)<len(rows):
+              report.append('- ALERTA: migração de capas ainda não cobre todo o acervo.')
+          if len(pages)<5:
+              report.append('- ALERTA: poucas páginas institucionais.')
+          Path('recipes-site').mkdir(exist_ok=True)
+          Path('recipes-site/adsense-audit.md').write_text('\n'.join(report)+'\n',encoding='utf-8')
+          Path('recipes-site/adsense-audit.json').write_text(json.dumps({'posts':rows,'pages':[{'title':p.get('title'),'url':p.get('url')} for p in pages]},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Commit audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recipes-site/adsense-audit.md recipes-site/adsense-audit.json
+          git commit -m "Record Receitas Para Pequenos AdSense audit" || true
+          git pull --rebase origin main
+          git push origin main
